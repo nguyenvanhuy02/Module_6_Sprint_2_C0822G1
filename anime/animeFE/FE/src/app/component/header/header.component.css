@@ -1,0 +1,57 @@
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+.profile-box {
+  position: relative;
+}
+.profile-box:hover .profile {
+  display: block;
+}
+.profile {
+  margin: 0 auto;
+  padding: 12px;
+  width: 200px;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  display: none;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  background: white;
+
+
+}
+.profile-item {
+  margin-bottom: 8px;
+  border-bottom: 1px solid #FFD333;
+}
+
+.profile-item button {
+  color: #FFD333;
+  font-weight: 300 !important;
+  border: none;
+  background: white;
+}
+.profile-item button:hover {
+  color:#FFD333;
+}
+
+.btn-account {
+  border: 1px solid #FFD333;
+  color: #FFD333;
+  border-radius: 4px;
+  background: white;
+  transition: all 0.4s;
+  font-weight: 300;
+}
+.color-tran {
+  color: transparent !important;
+
+}
+.btn-account:hover {
+  background: #FFD333;
+  color: white;
+}
