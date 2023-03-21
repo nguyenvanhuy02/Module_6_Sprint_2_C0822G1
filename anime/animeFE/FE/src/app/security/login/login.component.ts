@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from "@angular/forms";
-import {ToastrService} from "ngx-toastr";
-import {Router} from "@angular/router";
-import {AuthService} from "../../service/security/auth.service";
-import {TokenService} from "../../service/security/token.service";
-import {MessageRespone} from "../../model/security/message-respone";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
+import {AuthService} from '../../service/security/auth.service';
+import {TokenService} from '../../service/security/token.service';
+import {MessageRespone} from '../../model/security/message-respone';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private tokenService: TokenService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.getFormLogin();
@@ -64,7 +65,7 @@ export class LoginComponent implements OnInit {
       if (messageRespone.message) {
         this.toastr.error('Không tìm thấy người dùng');
         this.router.navigateByUrl('/login');
-        console.log("Đang Nhập Thát Bại RỒi Nha")
+        console.log('Đang Nhập Thát Bại RỒi Nha');
       } else {
         this.toastr.error('Đăng nhập thất bại');
         this.router.navigateByUrl('/login');

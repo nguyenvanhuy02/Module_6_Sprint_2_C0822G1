@@ -8,8 +8,8 @@ import {AnimeDtoHome} from "../../dto/product/anime-dto-home";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  // @ts-ignore
-  listAnime: AnimeDtoHome = [];
+
+  listAnime: AnimeDtoHome[] = [];
 
   constructor(private animeService: AnimeService) {
   }

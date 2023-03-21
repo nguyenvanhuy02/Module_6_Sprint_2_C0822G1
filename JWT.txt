@@ -1,0 +1,1 @@
+Lúc login sẽ gọi qua hàm createToken tạo ra token 

@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {TokenService} from "../../service/security/token.service";
-import {ActivatedRouteSnapshot, Router} from "@angular/router";
+import {ActivatedRouteSnapshot, CanActivate, Router} from '@angular/router';
 import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminService {
+export class AdminService implements CanActivate{
 
   constructor(
     private tokenService: TokenService,

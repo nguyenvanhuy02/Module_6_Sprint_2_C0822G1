@@ -38,7 +38,6 @@ export class HeaderComponent implements OnInit {
           this.accountRole = 'ROLE_ADMIN';
         }
       }
-      this.getOrder();
     }
   }
 

@@ -11,7 +11,7 @@ export class AnimeService {
 
   constructor(private httpClient: HttpClient) { }
 
-  findAllHome(): Observable<AnimeDtoHome>{
-    return this.httpClient.get<AnimeDtoHome>(environment.api_url);
+  findAllHome(): Observable<any>{
+    return this.httpClient.get<any>(environment.api_url);
   }
 }

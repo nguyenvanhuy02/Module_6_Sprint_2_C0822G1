@@ -85,7 +85,7 @@
             <a href="" class="nav-item nav-link active">Trang Chủ</a>
             <a routerLink="/product" class="nav-item nav-link">Sản Phẩm</a>
             <a href="shop.html" class="nav-item nav-link">Tin Tức</a>
-            <a href="shop.html" class="nav-item nav-link">Thành Viên</a>
+            <a href="shop.html" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="nav-item nav-link">Thành Viên</a>
           </div>
           <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
             <a href="" class="btn px-0">
