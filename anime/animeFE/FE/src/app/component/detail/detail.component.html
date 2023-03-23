@@ -3,22 +3,14 @@
   <div class="row px-xl-5">
     <div class="col-lg-5 mb-30">
       <div id="product-carousel" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner bg-light">
+        <div class="carousel-inner bg-light" *ngIf="detailAnime.images">
           <div class="carousel-item active">
-            <img class="w-100 h-100"
-                 src="https://vn-test-11.slatic.net/p/a2b08e6fa9a22cf0e61668620789f824.jpg" alt="Image">
+            <img style="height: 500px ; width: 500px;" src="{{detailAnime.images[0].url}}" alt="Image">
           </div>
-          <div class="carousel-item">
-            <img class="w-100 h-100"
-                 src="https://vn-test-11.slatic.net/p/219a4e62d230fa3d71db05b6d8311593.jpg" alt="Image">
-          </div>
-          <div class="carousel-item">
-            <img class="w-100 h-100"
-                 src="https://vn-test-11.slatic.net/p/30716118ca75310dda5c079b317e7312.jpg" alt="Image">
-          </div>
-          <div class="carousel-item">
-            <img class="w-100 h-100"
-                 src="	https://vn-test-11.slatic.net/p/e2febe6cc50626f0394b21b79cece17e.jpg" alt="Image">
+          <div class="carousel-item" *ngFor="let img of detailAnime.images,let i = index">
+            <div>
+              <img style="height: 500px ; width: 500px;" src="{{img.url}}" alt="Image">
+            </div>
           </div>
         </div>
         <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
@@ -32,48 +24,42 @@
 
     <div class="col-lg-7 h-auto mb-30">
       <div class="h-100 bg-light p-30">
-        <h3>Dragon Ball Super</h3>
+        <h3>{{detailAnime.name}}</h3>
         <div class="d-flex mb-3">
           <div class="text-primary mr-2">
-            <!--                            <small class="fas fa-star"></small>-->
-            <!--                            <small class="fas fa-star"></small>-->
-            <!--                            <small class="fas fa-star"></small>-->
-            <!--                            <small class="fas fa-star-half-alt"></small>-->
-            <!--                            <small class="far fa-star"></small>-->
           </div>
-          <!--                        <small class="pt-1">(99 Reviews)</small>-->
         </div>
-        <h3 class="font-weight-semi-bold mb-4">30,000 <sup>đ</sup></h3>
+        <h3 class="font-weight-semi-bold mb-4">{{detailAnime.price | number}} <sup>đ</sup></h3>
         <strong class="text-dark mr-3">Nội Dung: </strong>
-        <p class="mb-4">Sau trận chiến hoành tráng với Ma Buu, thế giới vừa lấy lại vẻ thanh bình vốn có thì đã
-          phải đối diện với một nguy cơ mới!! Kẻ địch lần này đến từ vũ trụ thứ 6.</p>
+        <p class="mb-4">{{detailAnime.description}}</p>
         <div class="d-flex mb-3">
           <strong class="text-dark mr-3">Tác Giả: </strong>
-          <p>Akira Toriyama</p>
+          <p>{{detailAnime.author}}</p>
         </div>
-        <div class="d-flex mb-4">
-          <strong class="text-dark mr-3">Họa Sĩ:</strong>
-          <p>Toyotarou</p>
-        </div>
+<!--        <div class="d-flex mb-4">-->
+<!--          <strong class="text-dark mr-3">Họa Sĩ:</strong>-->
+<!--          <p>{{detailAnime.}}</p>-->
+<!--        </div>-->
         <div class="d-flex mb-4">
           <strong class="text-dark mr-3">Xuất Xứ:</strong>
-          <p>Việt Nam</p>
+          <p>{{detailAnime.origin}}</p>
         </div>
         <div class="d-flex align-items-center mb-4 pt-2">
           <div class="input-group quantity mr-3" style="width: 130px;">
             <div class="input-group-btn">
-              <button class="btn btn-primary btn-minus">
+              <button class="btn btn-primary btn-minus" (click)="minus()">
                 <i class="fa fa-minus"></i>
               </button>
             </div>
-            <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
+<!--            <input type="text" class="form-control bg-secondary border-0 text-center" value="{{quality}}">-->
+            <span class="form-control bg-secondary border-0 text-center" id="var-value">{{quality}}</span>
             <div class="input-group-btn">
-              <button class="btn btn-primary btn-plus">
+              <button class="btn btn-primary btn-plus" (click)="plus()">
                 <i class="fa fa-plus"></i>
               </button>
             </div>
           </div>
-          <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm Vào Giỏ Hàng
+          <button (click)="add(detailAnime.id)" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm Vào Giỏ Hàng
           </button>
         </div>
         <div class="d-flex pt-2">

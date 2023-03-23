@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'product', component: ProductComponent},
   {path: 'cart', component: CartComponent , canActivate: [UserService]},
-  {path: 'detail', component: DetailComponent},
+  {path: 'detail/:id', component: DetailComponent},
   {path: 'login', component: LoginComponent},
 ];
 

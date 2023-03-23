@@ -1,9 +1,13 @@
 package com.example.anime.repository.product;
 
 import com.example.anime.dto.product.IAnimeHomeDto;
+import com.example.anime.dto.product.ProductAnimeDto;
 import com.example.anime.model.product.Anime;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +22,16 @@ public interface IAnimeRepository extends JpaRepository<Anime, Integer> {
             "group by a.id \n" +
             " ORDER BY  STR_TO_DATE(date_submitted, '%d/%m/%Y') desc LIMIT 8;",nativeQuery = true)
     List<IAnimeHomeDto> findAnimeHome();
+
+    @Query(value = "select an.id , an.name as name ,\n" +
+            "             an.price as price ,\n" +
+            "             i.url as url \n" +
+            "            from `anime` an \n" +
+            "             join `image` i \n" +
+            "             on an.id = i.id_anime \n" +
+            "             where an.price BETWEEN :#{#productAnimeDto.priceMin} and :#{#productAnimeDto.priceMax} \n" +
+            "            and an.delete_status = 0 \n" +
+            "            and an.name like %:#{#productAnimeDto.name}% \n" +
+            "            group by an.id ",nativeQuery = true)
+    Page<IAnimeHomeDto> findAnimeProduct(@Param("productAnimeDto")ProductAnimeDto productAnimeDto , Pageable pageable);
 }
