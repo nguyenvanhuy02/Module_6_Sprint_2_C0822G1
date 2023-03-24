@@ -59,8 +59,6 @@ export class DetailComponent implements OnInit {
     this.animeService.detailAnime(id).subscribe(
       data => {
         this.detailAnime = data;
-        // @ts-ignore
-        this.urlShow = this.clothesDetail.images[0].url;
       }
     );
   }
@@ -75,36 +73,20 @@ export class DetailComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  // add(id: any, quantity: number) {
-  //   this.user = JSON.parse(this.tokenService.getUser());
-  //   if (this.user == null) {
-  //     this.toast.error('Bạn cần phải đăng nhập để đặt hàng');
-  //   }
-  //   this.getFormOrder(id, quantity, this.user);
-  //   console.log('số lượng thêm ' + quantity);
-  //   this.orderService.addOrder(this.orderForm.value).subscribe(data => {
-  //     this.totalQuantity = quantity + this.quantity;
-  //     this.orderService.quantityCount$.next(this.totalQuantity);
-  //     console.log('tổng số lượng chuyên ' + this.totalQuantity);
-  //     this.toast.success('Đặt hàng thành công');
-  //   });
-  // }
-  // tslint:disable-next-line:typedef
-  add(id: any) {
+  add(id: any, quantity: number) {
     this.user = JSON.parse(this.tokenService.getUser());
     if (this.user == null) {
       this.toast.error('Bạn cần phải đăng nhập để đặt hàng');
     }
-    this.getFormOrder(id, this.quality, this.user);
-    console.log('số lượng thêm ' + this.quality);
+    this.getFormOrder(id, quantity, this.user);
+    console.log('số lượng thêm ' + quantity);
     this.orderService.addOrder(this.orderForm.value).subscribe(data => {
-      this.totalQuantity = this.quality + this.quantity;
+      this.totalQuantity = quantity + this.quantity;
       this.orderService.quantityCount$.next(this.totalQuantity);
       console.log('tổng số lượng chuyên ' + this.totalQuantity);
       this.toast.success('Đặt hàng thành công');
     });
   }
-
   // tslint:disable-next-line:typedef
   getOrder() {
     this.currentUser = JSON.parse(this.tokenService.getUser());

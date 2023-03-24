@@ -29,9 +29,7 @@ export class ProductComponent implements OnInit {
   findAllProduct(pageNumber: number) {
     this.animeService.findAllProduct(this.rfSearch.value, pageNumber).subscribe(
       data => {
-        console.log(data);
         this.pageProduct = data;
-        console.log(data);
       }
     );
   }
@@ -43,7 +41,6 @@ export class ProductComponent implements OnInit {
       priceMin: [0],
       priceMax: [2000000]
     });
-    console.log('search nè ' + this.rfSearch.value);
   }
 
   // tslint:disable-next-line:typedef
@@ -53,8 +50,6 @@ export class ProductComponent implements OnInit {
       priceMin,
       priceMax,
     });
-    console.log('maksdoasd' + this.rfSearch.value.name);
-    console.log(this.rfSearch.value);
     this.findAllProduct(0);
   }
 

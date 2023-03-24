@@ -6,7 +6,8 @@ export const environment = {
   production: false ,
   api_url: 'http://localhost:8080/anime',
   login_url: 'http://localhost:8080/anime/login',
-  orderUrl: 'http://localhost:8080/order/'
+  orderUrl: 'http://localhost:8080/order/',
+  userUrl: 'http://localhost:8080/user/',
 };
 
 /*

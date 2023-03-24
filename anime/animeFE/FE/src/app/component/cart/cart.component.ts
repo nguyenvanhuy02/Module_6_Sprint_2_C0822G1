@@ -43,7 +43,6 @@ export class CartComponent implements OnInit {
         // @ts-ignore
         // tslint:disable-next-line:radix
         this.totalQuantity = this.totalQuantity + this.cart[i].quantity;
-        console.log('Số lượng cũ nè ' + this.cart[i].quantity);
       }
       this.orderService.quantityCount$.next(this.totalQuantity);
     }, error => {

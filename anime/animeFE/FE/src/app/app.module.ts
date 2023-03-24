@@ -14,6 +14,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './security/login/login.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+import { PaymentComponent } from './component/payment/payment.component';
+import { SignupComponent } from './security/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {ToastrModule} from "ngx-toastr";
     CartComponent,
     ProductComponent,
     DetailComponent,
-    LoginComponent
+    LoginComponent,
+    PaymentComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

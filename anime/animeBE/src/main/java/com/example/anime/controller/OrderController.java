@@ -105,4 +105,17 @@ public class OrderController {
         orderService.addOrderDetail(orderDetail);
         return new ResponseEntity<>(orderDetail, HttpStatus.OK);
     }
+
+    @GetMapping("payment/{id}")
+    public ResponseEntity<Payment> payment(@PathVariable Integer id, @RequestParam String note) {
+        Payment payment = paymentService.getPaymentByUserId(id);
+        payment.setPaymentStatus(true);
+        if(note.length() == 0) {
+            payment.setShippingDescription("Không có ghi chú");
+        } else {
+            payment.setShippingDescription(note);
+        }
+        paymentService.addPayment(payment);
+        return new ResponseEntity<>(payment, HttpStatus.OK);
+    }
 }

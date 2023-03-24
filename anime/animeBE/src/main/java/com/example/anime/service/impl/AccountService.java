@@ -15,4 +15,9 @@ public class AccountService implements IAccountService {
     public Account findAccountByUsername(String username) {
         return accountRepository.findAccountByUsername(username);
     }
+
+    @Override
+    public Account createAccount(Account account) {
+        return accountRepository.save(account);
+    }
 }

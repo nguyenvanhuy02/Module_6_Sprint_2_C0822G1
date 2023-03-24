@@ -28,5 +28,9 @@ export class OrderService {
   plus(id: number): Observable<any> {
     return this.httpClient.get<any>(environment.orderUrl + 'plus/' + id);
   }
+
+  payment(id: number | undefined, note: string): Observable<any> {
+    return this.httpClient.get<any>(environment.orderUrl + 'payment/' + id + '?note=' + note);
+  }
 }
 
