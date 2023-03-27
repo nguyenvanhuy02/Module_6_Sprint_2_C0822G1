@@ -5,6 +5,7 @@ import {AnimeDtoHome} from '../../dto/product/anime-dto-home';
 import {environment} from '../../../environments/environment';
 import {PageProduct} from '../../model/product/pageProduct';
 import {Anime} from '../../model/product/anime';
+import {ImgDto} from '../../dto/product/imgDto';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +23,15 @@ export class AnimeService {
     return this.httpClient.post<any>(environment.api_url + '/product' + '?page=' + pageNumber, search);
   }
 
-  detailAnime(id: number): Observable<Anime>{
+  detailAnime(id: number): Observable<Anime> {
     return this.httpClient.get<Anime>(environment.api_url + '/detail/' + id);
   }
 
+  createAnime(anime: any): Observable<Anime> {
+    return this.httpClient.post<Anime>(environment.api_url + '/create', anime);
+  }
+
+  createImg(image: any): Observable<ImgDto> {
+    return this.httpClient.post<ImgDto>(environment.api_url + '/img/create', image);
+  }
 }

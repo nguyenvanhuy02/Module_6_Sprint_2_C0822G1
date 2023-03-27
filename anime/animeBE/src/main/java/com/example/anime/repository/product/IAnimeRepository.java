@@ -20,7 +20,7 @@ public interface IAnimeRepository extends JpaRepository<Anime, Integer> {
             " join  shop_anime.image as i on a.id = i.id_anime\n" +
             "WHERE a.delete_status = 0 \n" +
             "group by a.id \n" +
-            " ORDER BY  STR_TO_DATE(date_submitted, '%d/%m/%Y') desc LIMIT 8;",nativeQuery = true)
+            " ORDER BY a.id desc LIMIT 8;",nativeQuery = true)
     List<IAnimeHomeDto> findAnimeHome();
 
     @Query(value = "select an.id , an.name as name ,\n" +
@@ -32,6 +32,7 @@ public interface IAnimeRepository extends JpaRepository<Anime, Integer> {
             "             where an.price BETWEEN :#{#productAnimeDto.priceMin} and :#{#productAnimeDto.priceMax} \n" +
             "            and an.delete_status = 0 \n" +
             "            and an.name like %:#{#productAnimeDto.name}% \n" +
-            "            group by an.id ",nativeQuery = true)
+            "            group by an.id" +
+            " ORDER BY an.id desc ",nativeQuery = true)
     Page<IAnimeHomeDto> findAnimeProduct(@Param("productAnimeDto")ProductAnimeDto productAnimeDto , Pageable pageable);
 }

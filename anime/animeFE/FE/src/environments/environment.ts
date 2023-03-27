@@ -3,11 +3,21 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false ,
+  production: false,
   api_url: 'http://localhost:8080/anime',
   login_url: 'http://localhost:8080/anime/login',
   orderUrl: 'http://localhost:8080/order/',
   userUrl: 'http://localhost:8080/user/',
+  firebaseConfig: {
+    apiKey: 'AIzaSyB7ZN2AF2fr4mqhL1X6yOc9mQvlJnBDSRA',
+    database: 'https://shopanime-ae6cb-default-rtdb.firebaseio.com',
+    authDomain: 'shopanime-ae6cb.firebaseapp.com',
+    projectId: 'shopanime-ae6cb',
+    storageBucket: 'shopanime-ae6cb.appspot.com',
+    messagingSenderId: '238683127641',
+    appId: '1:238683127641:web:82c115ab2f9490d004d648',
+    measurementId: 'G-ZV9YCQFZVN'
+  }
 };
 
 /*

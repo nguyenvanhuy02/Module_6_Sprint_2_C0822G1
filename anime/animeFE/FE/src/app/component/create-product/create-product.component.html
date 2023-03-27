@@ -1,0 +1,93 @@
+<!--<div class="form-group col-12">-->
+<!--  <input type="file"-->
+<!--         id="file"-->
+<!--         #userPhoto-->
+<!--         (change)="onFileSelected($event)"-->
+<!--         name="image"-->
+<!--         autocomplete="off"-->
+<!--  />-->
+<!--</div>-->
+
+<div class="d-flex justify-content-center align-items-center mt-2 mb-2">
+  <div class="boxed shadow h-100 ">
+    <form *ngIf="rfCreateProduct" class="form" [formGroup]="rfCreateProduct" (ngSubmit)="(createNewProduct())">
+      <fieldset>
+        <legend>
+          <div class="mt-4 text-center">
+            <h1>Thêm mới sản phẩm</h1>
+          </div>
+        </legend>
+      </fieldset>
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="name" class="form-label ms-2">Tên Truyện Tranh</label>
+        </div>
+        <input id="name" type="text" class="form-control" formControlName="name"/>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="image" class="form-label ms-2">Hình ảnh sản phẩm</label>
+        </div>
+        <input id="image"
+               #file
+               type="file"
+               multiple
+               (change)="showPreview($event)"
+               autocomplete="off" class="form-control"
+               formControlName="images"
+               accept="image/png, image/gif, image/jpeg">
+        <div class="invalid-feedback d-block">
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="description" class="form-label ms-2">Mô Tả</label>
+        </div>
+        <input id="description" type="text" class="form-control" formControlName="description"/>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="price" class="form-label ms-2">Giá Tiền</label>
+        </div>
+        <input id="price" type="text" class="form-control" formControlName="price"/>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="quantity" class="form-label ms-2">Số Lượng</label>
+        </div>
+        <input id="quantity" type="text" class="form-control" formControlName="quantity"/>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="author" class="form-label ms-2">Tác Giả</label>
+        </div>
+        <input id="author" type="text" class="form-control" formControlName="author"/>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="origin" class="form-label ms-2">Xuất Xứ</label>
+        </div>
+        <input id="origin" type="text" class="form-control" formControlName="origin"/>
+      </div>
+
+
+      <div class="d-flex mt-3 mb-2 w-100">
+        <button type="submit" [disabled]="!this.rfCreateProduct.valid" style="margin-right: 5px"
+                class="btn btn-primary d-flex justify-content-center">
+          <p>
+            Thêm Mới
+          </p>
+        </button>
+      </div>
+
+
+    </form>
+
+  </div>
+</div>

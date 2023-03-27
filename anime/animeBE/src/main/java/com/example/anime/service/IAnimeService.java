@@ -14,4 +14,6 @@ public interface IAnimeService {
     Page<IAnimeHomeDto> findProductAnime(ProductAnimeDto animeDto, Pageable pageable);
 
     Anime findById(Integer id);
+
+    Anime createAnime (Anime anime);
 }

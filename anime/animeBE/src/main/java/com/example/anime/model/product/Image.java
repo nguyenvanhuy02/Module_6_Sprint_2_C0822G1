@@ -11,7 +11,6 @@ public class Image {
     private Integer id;
     private String url;
 
-    private boolean deleteStatus;
 
     @JsonBackReference
     @ManyToOne
@@ -32,14 +31,6 @@ public class Image {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public boolean isDeleteStatus() {
-        return deleteStatus;
-    }
-
-    public void setDeleteStatus(boolean deleteStatus) {
-        this.deleteStatus = deleteStatus;
     }
 
     public Anime getAnime() {

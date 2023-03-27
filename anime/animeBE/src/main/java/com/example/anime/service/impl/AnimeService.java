@@ -1,5 +1,6 @@
 package com.example.anime.service.impl;
 
+import com.example.anime.dto.product.AnimeDto;
 import com.example.anime.dto.product.IAnimeHomeDto;
 import com.example.anime.dto.product.ProductAnimeDto;
 import com.example.anime.model.product.Anime;
@@ -31,5 +32,11 @@ public class AnimeService implements IAnimeService {
     public Anime findById(Integer id) {
         return animeRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public Anime createAnime(Anime anime) {
+        return animeRepository.save(anime);
+    }
+
 
 }

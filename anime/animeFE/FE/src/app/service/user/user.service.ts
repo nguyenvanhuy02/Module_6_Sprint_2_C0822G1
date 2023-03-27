@@ -12,6 +12,6 @@ export class UserService {
   }
 
   createUser(user: any): Observable<any> {
-    return this.httpClient.get<any>(environment.userUrl + 'create', user);
+    return this.httpClient.post<any>(environment.userUrl + 'create', user);
   }
 }

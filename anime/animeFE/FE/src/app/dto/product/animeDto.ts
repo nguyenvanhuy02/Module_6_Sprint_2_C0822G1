@@ -1,14 +1,13 @@
-import {Img} from './img';
+import {ImgDto} from './imgDto';
 
-export interface Anime {
+export interface AnimeDto {
   id?: number;
   name?: string;
   description?: string;
   price: number;
   dateSubmitted?: string;
   quantity?: number;
-  deleteStatus?: number;
   author?: string;
   origin?: string;
-  images: Img;
+  images: ImgDto;
 }

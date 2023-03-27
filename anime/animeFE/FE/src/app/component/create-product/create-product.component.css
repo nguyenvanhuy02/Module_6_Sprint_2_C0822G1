@@ -1,0 +1,102 @@
+*:not(i) {
+  font-family: "Noto Sans", serif !important;
+  box-sizing: border-box !important;
+  margin: 0;
+  /*padding: 0;*/
+  border: 0;
+  font-size: 16px;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+.remove_img {
+  padding: 3px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  display: block;
+  background-color: #ff0000a6;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+}
+h1 {
+  font-size: 32px;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+}
+#product-model {
+  display: flex;
+  justify-content: center;
+}
+.boxed {
+  width: 700px;
+  height: auto;
+  border: 5px solid;
+  border-image-slice: 1;
+  border-color: rgb(189, 214, 236);
+  padding: 0px 20px;
+  border-radius: 8px;
+  box-shadow: 4px 2px 4px 1px rgb(238, 243, 247);
+  background-color: rgb(238, 243, 247) !important;
+  /*overflow: auto;*/
+}
+
+.boxed::-webkit-scrollbar {
+  display: none;
+}
+
+button {
+  width: 200px;
+  border-radius: 20px;
+}
+
+.slide {
+  animation: slide 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation-iteration-count: infinite;
+  animation-delay: 0.2;
+}
+@keyframes slide {
+  0% {
+    transform: translateY(0px);
+  }
+  10% {
+    transform: translateY(1px);
+  }
+  20% {
+    transform: translateY(2px);
+  }
+  30% {
+    transform: translateY(2px);
+  }
+  40% {
+    transform: translateY(1px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  60% {
+    transform: translateY(-1px);
+  }
+  70% {
+    transform: translateY(-2px);
+  }
+  80% {
+    transform: translateY(-2px);
+  }
+  90% {
+    transform: translateY(-1px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+:host ::ng-deep .ck .ck-toolbar {
+  font-size: 13px;
+}
+.invalid-feedback{
+  font-size: 13px;
+}
