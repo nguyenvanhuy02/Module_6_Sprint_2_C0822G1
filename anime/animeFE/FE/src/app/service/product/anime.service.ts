@@ -23,6 +23,10 @@ export class AnimeService {
     return this.httpClient.post<any>(environment.api_url + '/product' + '?page=' + pageNumber, search);
   }
 
+  findAllProductManagement(search: any, pageNumber: number): Observable<any> {
+    return this.httpClient.post<any>(environment.api_url + '/productManagement' + '?page=' + pageNumber, search);
+  }
+
   detailAnime(id: number): Observable<Anime> {
     return this.httpClient.get<Anime>(environment.api_url + '/detail/' + id);
   }

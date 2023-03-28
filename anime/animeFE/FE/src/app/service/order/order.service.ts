@@ -32,5 +32,14 @@ export class OrderService {
   payment(id: number | undefined, note: string): Observable<any> {
     return this.httpClient.get<any>(environment.orderUrl + 'payment/' + id + '?note=' + note);
   }
+
+  delete(id: number): Observable<any> {
+    return this.httpClient.delete<any>(environment.orderUrl + 'delete/' + id);
+  }
+
+  historyPayment(id: number | undefined, pageNumber: number): Observable<any> {
+    return this.httpClient.get<any>(environment.orderUrl + id + '/' + 'history?page=' + pageNumber);
+  }
+
 }
 

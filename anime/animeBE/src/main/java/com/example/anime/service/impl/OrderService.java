@@ -1,11 +1,14 @@
 package com.example.anime.service.impl;
 
+import com.example.anime.dto.product.IOrderDetailHistory;
 import com.example.anime.model.oder.OrderAnime;
 import com.example.anime.model.oder.OrderDetail;
 import com.example.anime.repository.product.IOrderDetailRepository;
 import com.example.anime.repository.product.IOrderRepository;
 import com.example.anime.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,5 +45,20 @@ public class OrderService implements IOrderService {
     @Override
     public OrderDetail getOrderDetail(Integer id) {
         return orderDetailRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteOrderDetail(Integer id) {
+        orderDetailRepository.deleteOrderDetailId(id);
+    }
+
+    @Override
+    public OrderDetail findById(Integer id) {
+        return orderDetailRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Page<IOrderDetailHistory> getHistory(Integer id, Pageable pageable) {
+        return orderDetailRepository.getHistory(id,pageable);
     }
 }

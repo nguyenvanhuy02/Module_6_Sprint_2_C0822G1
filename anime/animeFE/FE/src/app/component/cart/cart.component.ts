@@ -4,6 +4,7 @@ import {User} from '../../model/user/user';
 import {TokenService} from '../../service/security/token.service';
 import {OrderService} from '../../service/order/order.service';
 import {ToastrService} from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
@@ -72,7 +73,7 @@ export class CartComponent implements OnInit {
   minus(id: number | any) {
     // tslint:disable-next-line:prefer-const
     // @ts-ignore
-    var quantity = +document.getElementById('quantity' + id).innerHTML;
+    const quantity = +document.getElementById('quantity' + id).innerHTML;
     if (quantity !== 1) {
       this.orderService.minus(id).subscribe(data => {
         this.totalPrice = 0;
@@ -107,6 +108,35 @@ export class CartComponent implements OnInit {
   clear() {
     this.cart = [];
     this.totalPrice = 0;
+  }
+
+  delete(id: number , name: string): void {
+    Swal.fire({
+      title: 'Bạn Có Muốn Xóa?',
+      text: 'Quyển Truyện Này: ' + name + ' Không ?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#BBBBBB',
+      confirmButtonText: 'Có',
+      cancelButtonText: 'Không'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.orderService.delete(id).subscribe(() => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Xóa Thành Công ',
+            showConfirmButton: false,
+            timer: 2000
+          });
+          this.getOrder();
+          this.clear();
+        }, error => {
+          console.log(error);
+        });
+      }
+    });
   }
 
 }

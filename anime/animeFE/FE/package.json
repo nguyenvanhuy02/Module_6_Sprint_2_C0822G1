@@ -21,11 +21,12 @@
     "@angular/platform-browser-dynamic": "~11.0.9",
     "@angular/router": "~11.0.9",
     "creditcardpayments": "^1.0.3",
+    "firebase": "^7.0.0 || ^8.0.0",
     "ngx-toastr": "^13.2.1",
     "rxjs": "~6.6.0",
+    "sweetalert2": "^11.7.3",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2",
-    "firebase": "^7.0.0 || ^8.0.0"
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1100.7",

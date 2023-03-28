@@ -1,6 +1,8 @@
 package com.example.anime.repository.product;
 
+import com.example.anime.dto.product.AnimeManagement;
 import com.example.anime.dto.product.IAnimeHomeDto;
+import com.example.anime.dto.product.IAnimeManagement;
 import com.example.anime.dto.product.ProductAnimeDto;
 import com.example.anime.model.product.Anime;
 import org.springframework.data.domain.Page;
@@ -35,4 +37,21 @@ public interface IAnimeRepository extends JpaRepository<Anime, Integer> {
             "            group by an.id" +
             " ORDER BY an.id desc ",nativeQuery = true)
     Page<IAnimeHomeDto> findAnimeProduct(@Param("productAnimeDto")ProductAnimeDto productAnimeDto , Pageable pageable);
+
+    @Query(value = "select an.id , an.name as name ,\n" +
+            "             an.price as price ,\n" +
+            "             an.date_submitted as dateSubmitted ,\n" +
+            "             an.description as description ,\n" +
+            "             an.quantity as quantity ,\n" +
+            "             an.author as author ,\n" +
+            "             an.origin as origin ,\n" +
+            "             i.url as url \n" +
+            "            from `anime` an \n" +
+            "             join `image` i \n" +
+            "             on an.id = i.id_anime \n" +
+            "            and an.delete_status = 0 \n" +
+            "            and an.name like %:#{#animeManagement.name}% \n" +
+            "            group by an.id" +
+            " ORDER BY an.id desc ",nativeQuery = true)
+    Page<IAnimeManagement> findAnimeManagement(@Param("animeManagement") AnimeManagement animeManagement , Pageable pageable);
 }

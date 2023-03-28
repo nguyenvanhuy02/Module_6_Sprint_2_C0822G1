@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <h3 style="text-align: center;" class="mt-3 mb-3">Lịch Sử Mua Hàng</h3>
+
+      <div class="row" id="list-row">
+        <table id="customer_table" class="table table-striped table-bordered container">
+          <thead>
+          <tr>
+            <th>STT</th>
+            <th>Tên Truyện Tranh</th>
+            <th>Ngày Mua Truyện</th>
+            <th>Số Lượng</th>
+            <th>Giá</th>
+            <th>Tổng Tiền</th>
+            <th>Tác Giả</th>
+            <th>Xem Chi Tiết</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of pageHistory.content ; let i = index">
+            <td class="text-end">{{i + 1}}</td>
+            <td>{{item.name}}</td>
+            <td class="text-end">{{item.datePurchase}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.price | number}}<sup>đ</sup></td>
+            <td class="text-end">{{item.price * item.quantity | number}}<sup>đ</sup></td>
+            <td>{{item.author}}</td>
+            <td class="text-center">
+              <a style="margin-left:32px ;" [routerLink]="['/detail/', item.id]"
+                 class="btn btn-outline-dark btn-square text-center" routerLink="/detail"><i class="fa fa-info"></i></a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <!--        <h3 id="null-result-noti" *ngIf="pageTransaction == null">Không tìm thấy kết quả phù hợp</h3>-->
+      </div>
+
+
+      <!-- Phân trang -->
+      <div class="col-12">
+        <nav>
+          <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link"
+                                     [ngClass]="pageHistory?.first ? 'disabled': ''"
+                                     (click)="gotoPage(0)"> << </a></li>
+            <li class="page-item" *ngIf="pageHistory.number - 2 > 0">
+              <a class="page-link" (click)="gotoPage(pageHistory.number - 3)">{{pageHistory.number - 2}}</a>
+            </li>
+            <li class="page-item" *ngIf="pageHistory.number - 1 > 0">
+              <a class="page-link" (click)="gotoPage(pageHistory.number - 2)">{{pageHistory.number - 1}}</a>
+            </li>
+            <li class="page-item" *ngIf="pageHistory.number > 0">
+              <a class="page-link" (click)="gotoPage(pageHistory.number   - 1)">{{pageHistory.number}}</a>
+            </li>
+
+            <li class="page-item active"><a class="page-link">{{pageHistory.number + 1}}</a></li>
+
+            <li class="page-item" *ngIf="pageHistory.number + 2 <= pageHistory.totalPages">
+              <a class="page-link" (click)="gotoPage(pageHistory.number + 1)">{{pageHistory.number + 2}}</a>
+            </li>
+            <li class="page-item" *ngIf="pageHistory.number + 3 <= pageHistory.totalPages">
+              <a class="page-link" (click)="gotoPage(pageHistory.number + 2)">{{pageHistory.number + 3}}</a>
+            </li>
+            <li class="page-item" *ngIf="pageHistory.number + 4 <= pageHistory.totalPages">
+              <a class="page-link" (click)="gotoPage(pageHistory.number + 3)">{{pageHistory.number + 4}}</a>
+            </li>
+            <li class="page-item"><a class="page-link"
+                                     [ngClass]="pageHistory.last ? 'disabled': ''"
+                                     (click)="gotoPage(pageHistory.totalPages - 1)"> >> </a>
+            </li>
+          </ul>
+        </nav>
+        <!--      </div>-->
+        <!--          <button class="btn btn-danger" data-bs-toggle="modal"-->
+        <!--                  (click)="sendToDeleteGroupModal()" data-bs-target="#deleteGroupModal"-->
+        <!--                  [disabled]="deleteIds.length == 0">-->
+        <!--            <i class="fa-regular fa-trash-can delete-icon"></i> Xoá-->
+        <!--          </button>-->
+        <!--        </div>-->
+      </div>
+
+    </div>
+  </div>
+
+
+</div>

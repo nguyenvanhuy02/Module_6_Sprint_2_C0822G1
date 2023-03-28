@@ -1,17 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {PageProduct} from '../../model/product/pageProduct';
 import {AnimeService} from '../../service/product/anime.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {PageProduct} from '../../model/product/pageProduct';
+import {PageProductManagement} from '../../model/product/pageProductManagement';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  selector: 'app-product-management',
+  templateUrl: './product-management.component.html',
+  styleUrls: ['./product-management.component.css']
 })
-export class ProductComponent implements OnInit {
-  // @ts-ignore
-  pageProduct: PageProduct;
+export class ProductManagementComponent implements OnInit {
+// @ts-ignore
+  pageProduct: PageProductManagement;
   // @ts-ignore
   rfSearch: FormGroup;
 
@@ -29,10 +30,10 @@ export class ProductComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   findAllProduct(pageNumber: number) {
-    this.animeService.findAllProduct(this.rfSearch.value, pageNumber).subscribe(
+    this.animeService.findAllProductManagement(this.rfSearch.value, pageNumber).subscribe(
       data => {
         this.pageProduct = data;
-      },
+      }
     );
   }
 
@@ -40,20 +41,9 @@ export class ProductComponent implements OnInit {
   searchProductForm() {
     this.rfSearch = this.formBuilder.group({
       name: [''],
-      priceMin: [0],
-      priceMax: [2000000]
     });
   }
 
-  // tslint:disable-next-line:typedef
-  setSearch(priceMin: number, priceMax: number) {
-    this.rfSearch.setValue({
-      name: this.rfSearch.value.name,
-      priceMin,
-      priceMax,
-    });
-    this.findAllProduct(0);
-  }
 
   // tslint:disable-next-line:typedef
   gotoPage(pageNumber: number) {

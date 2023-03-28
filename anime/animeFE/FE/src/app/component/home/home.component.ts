@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AnimeService} from "../../service/product/anime.service";
-import {AnimeDtoHome} from "../../dto/product/anime-dto-home";
+import {AnimeService} from '../../service/product/anime.service';
+import {AnimeDtoHome} from '../../dto/product/anime-dto-home';
 
 @Component({
   selector: 'app-home',

@@ -10,5 +10,5 @@ export interface Anime {
   deleteStatus?: number;
   author?: string;
   origin?: string;
-  images: Img;
+  images: Img[];
 }

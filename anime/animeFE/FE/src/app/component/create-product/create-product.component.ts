@@ -94,7 +94,7 @@ export class CreateProductComponent implements OnInit {
             }
           }
           this.toast.success('Thêm Mới Sản Phẩm Thành Công');
-          // this.route.navigateByUrl('/product');
+          this.route.navigateByUrl('/productManagement');
         });
       }, 10000);
     } else {
@@ -130,8 +130,8 @@ export class CreateProductComponent implements OnInit {
       for (const file of files) {
         if (file.size > 1048576) {
           this.toast.error('Dung Lượng Ảnh Vượt Quá 1Mb');
-          this.rfCreateProduct.patchValue({imageProduct: []});
-          this.selectedFile = [];
+          this.rfCreateProduct.patchValue({images: []});
+          this.rfCreateProduct.controls.images.setValue([]);
           break;
         }
         const reader = new FileReader();
@@ -144,8 +144,21 @@ export class CreateProductComponent implements OnInit {
       }
     } else {
       this.toast.error('Vui Lòng không Chọn Quá 5 ảnh');
-      this.rfCreateProduct.patchValue({imageProduct: []});
-      this.selectedFile = [];
+      this.rfCreateProduct.patchValue({images: []});
+      this.rfCreateProduct.controls.images.setValue([]);
+    }
+  }
+
+  // tslint:disable-next-line:typedef
+  deleteImageNew(index: number) {
+    // tslint:disable-next-line:triple-equals
+    if (this.selectedFile.length == 1) {
+      this.selectedFile.splice(index, 1);
+      this.toast.error('Bạn đã xóa 1 ảnh!');
+      this.rfCreateProduct.controls.images.setValue([]);
+    } else {
+      this.selectedFile.splice(index, 1);
+      this.toast.error('Bạn đã xóa 1 ảnh!');
     }
   }
 }

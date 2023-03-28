@@ -98,8 +98,12 @@
             </div>
           </div>
         </div>
+        <div style="margin-left: 222px ;" *ngIf="pageProduct == null">
+          <img height="320px" width="530" src="https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-not-found-image_2238448.jpg" alt="">
+          <h5 style="margin-left: 85px ">Không Tìm Thấy Sản Phẩm Phù Hợp</h5>
+        </div>
 
-        <div class="col-12">
+        <div class="col-12" *ngIf="pageProduct !== null">
           <nav>
             <ul class="pagination justify-content-center">
               <li class="page-item"><a class="page-link"

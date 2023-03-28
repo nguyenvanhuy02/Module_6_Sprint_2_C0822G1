@@ -17,6 +17,8 @@ public class Payment {
 
     private Boolean deleteStatus;
 
+    private String datePurchase;
+
     @JsonManagedReference
     @OneToOne(mappedBy = "payment")
     private OrderAnime oder;
@@ -59,5 +61,13 @@ public class Payment {
 
     public void setOder(OrderAnime oder) {
         this.oder = oder;
+    }
+
+    public String getDatePurchase() {
+        return datePurchase;
+    }
+
+    public void setDatePurchase(String datePurchase) {
+        this.datePurchase = datePurchase;
     }
 }

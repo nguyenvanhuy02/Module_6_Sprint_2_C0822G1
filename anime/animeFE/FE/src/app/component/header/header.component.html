@@ -33,7 +33,7 @@
           <button>Thông tin cá nhân</button>
         </li>
         <li class="profile-item">
-          <button [routerLink]="['history',currentUser.id]">Lịch sử mua hàng</button>
+          <button routerLink="history" >Lịch sử mua hàng</button>
         </li>
         <li class="profile-item">
           <button (click)="logOut()" class="login__btn">
@@ -43,7 +43,7 @@
         </li>
       </ul>
     </div>
-    <div *ngIf="!checkLogin" class="login d-flex" style="display: none ; margin-left: 220px;">
+    <div *ngIf="!checkLogin" class="login d-flex" style="display: none ; margin-left: 180px;">
       <button routerLink="/signup" class="login__btn mx-2 btn-account">
         <i class="fa-solid fa-circle-user"></i>
         Đăng ký
@@ -84,8 +84,8 @@
           <div class="navbar-nav mr-auto py-0">
             <a href="" class="nav-item nav-link active">Trang Chủ</a>
             <a routerLink="/product" class="nav-item nav-link">Sản Phẩm</a>
+            <a routerLink="/productManagement" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="nav-item nav-link">Quản Lý Sản Phẩm</a>
             <a href="shop.html" class="nav-item nav-link">Tin Tức</a>
-            <a href="shop.html" *ngIf="checkLogin && accountRole == 'ROLE_ADMIN'" class="nav-item nav-link">Thành Viên</a>
           </div>
           <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
             <a routerLink="/cart" class="btn px-0 ml-3">

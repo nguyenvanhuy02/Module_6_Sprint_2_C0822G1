@@ -20,6 +20,8 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import { CreateProductComponent } from './component/create-product/create-product.component';
+import { ProductManagementComponent } from './component/product-management/product-management.component';
+import { HistoryPaymentComponent } from './component/history-payment/history-payment.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { CreateProductComponent } from './component/create-product/create-produc
     PaymentComponent,
     SignupComponent,
     CreateProductComponent,
+    ProductManagementComponent,
+    HistoryPaymentComponent,
   ],
   imports: [
     BrowserModule,

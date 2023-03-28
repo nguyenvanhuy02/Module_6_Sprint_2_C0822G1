@@ -1,8 +1,6 @@
 package com.example.anime.service.impl;
 
-import com.example.anime.dto.product.AnimeDto;
-import com.example.anime.dto.product.IAnimeHomeDto;
-import com.example.anime.dto.product.ProductAnimeDto;
+import com.example.anime.dto.product.*;
 import com.example.anime.model.product.Anime;
 import com.example.anime.repository.product.IAnimeRepository;
 import com.example.anime.service.IAnimeService;
@@ -26,6 +24,11 @@ public class AnimeService implements IAnimeService {
     @Override
     public Page<IAnimeHomeDto> findProductAnime(ProductAnimeDto animeDto, Pageable pageable) {
         return animeRepository.findAnimeProduct(animeDto,pageable);
+    }
+
+    @Override
+    public Page<IAnimeManagement> findAnimeManagement(AnimeManagement animeManagement, Pageable pageable) {
+        return animeRepository.findAnimeManagement(animeManagement,pageable);
     }
 
     @Override

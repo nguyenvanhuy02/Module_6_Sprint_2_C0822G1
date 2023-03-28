@@ -1,9 +1,6 @@
 package com.example.anime.controller;
 
-import com.example.anime.dto.product.AnimeDto;
-import com.example.anime.dto.product.IAnimeHomeDto;
-import com.example.anime.dto.product.ImgProductDto;
-import com.example.anime.dto.product.ProductAnimeDto;
+import com.example.anime.dto.product.*;
 import com.example.anime.model.product.Anime;
 import com.example.anime.model.product.Image;
 import com.example.anime.service.IAnimeService;
@@ -53,6 +50,17 @@ public class AnimeController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(animeHomeDtos, HttpStatus.OK);
+    }
+
+    @PostMapping("/productManagement")
+    public ResponseEntity<Page<IAnimeManagement>> findAnimeManagement(
+            @RequestBody AnimeManagement animeManagement ,
+            @PageableDefault(value = 5)Pageable pageable){
+        Page<IAnimeManagement> animeManagements = animeService.findAnimeManagement(animeManagement, pageable);
+        if (animeManagements.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(animeManagements, HttpStatus.OK);
     }
 
     @GetMapping("detail/{id}")

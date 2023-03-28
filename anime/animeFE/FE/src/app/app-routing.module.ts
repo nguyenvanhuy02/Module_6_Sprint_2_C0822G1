@@ -9,6 +9,9 @@ import {UserService} from './security/guard/user.service';
 import {PaymentComponent} from './component/payment/payment.component';
 import {SignupComponent} from './security/signup/signup.component';
 import {CreateProductComponent} from './component/create-product/create-product.component';
+import {ProductManagementComponent} from './component/product-management/product-management.component';
+import {AdminService} from './security/guard/admin.service';
+import {HistoryPaymentComponent} from './component/history-payment/history-payment.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -18,7 +21,9 @@ const routes: Routes = [
   {path: 'detail/:id', component: DetailComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
-  {path: 'createProduct', component: CreateProductComponent},
+  {path: 'history', component: HistoryPaymentComponent, canActivate: [UserService]},
+  {path: 'createProduct', component: CreateProductComponent , canActivate: [AdminService]},
+  {path: 'productManagement', component: ProductManagementComponent , canActivate: [AdminService]},
 ];
 
 @NgModule({
