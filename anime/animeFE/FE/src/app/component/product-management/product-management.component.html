@@ -60,9 +60,9 @@
       <!-- Phân trang -->
       <div class="col-12" *ngIf="pageProduct !== null" >
         <nav>
-          <ul class="pagination justify-content-center">
+          <ul class="pagination justify-content-center" *ngIf="pageProduct">
             <li class="page-item"><a class="page-link"
-                                     [ngClass]="pageProduct?.first ? 'disabled': ''"
+                                     [ngClass]="pageProduct.first ? 'disabled': ''"
                                      (click)="gotoPage(0)"> << </a></li>
             <li class="page-item" *ngIf="pageProduct.number - 2 > 0">
               <a class="page-link" (click)="gotoPage(pageProduct.number - 3)">{{pageProduct.number - 2}}</a>

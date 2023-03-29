@@ -1,5 +1,6 @@
 package com.example.anime.controller;
 
+import com.example.anime.dto.respone.MessageRespone;
 import com.example.anime.dto.user.UserDto;
 import com.example.anime.model.account.Account;
 import com.example.anime.model.user.User;
@@ -12,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @CrossOrigin("*")
 @RestController
@@ -31,7 +34,18 @@ public class UserController {
     private IAccountRoleService accountRoleService;
 
     @PostMapping("/create")
-    public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
+        MessageRespone messageRespone = new MessageRespone();
+
+        if (accountService.existsByUserName(userDto.getUserName())){
+            messageRespone.setMessage("nousername");
+        }
+        if (userService.existsByEmail(userDto.getEmail())){
+            messageRespone.setMessage2("noemail");
+        }
+        if (messageRespone.getMessage2() != null || messageRespone.getMessage() != null) {
+            return new ResponseEntity<>(messageRespone,HttpStatus.OK);
+        }
         User user = new User();
         Account account = new Account();
         BeanUtils.copyProperties(userDto, account);
@@ -49,6 +63,6 @@ public class UserController {
 
         userService.createUser(user);
         accountRoleService.createAccountRole(user.getAccount().getId(), 2);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(new MessageRespone("yes"),HttpStatus.OK);
     }
 }

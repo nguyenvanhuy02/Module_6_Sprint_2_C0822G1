@@ -11,66 +11,181 @@
             ">
           <div class="card-body p-5 shadow-5 text-center">
             <h2 class="fw-bold mb-5">Đăng Ký</h2>
-            <form [formGroup]="rfAddCustomer" (ngSubmit)="create()"  >
+            <form [formGroup]="rfAddCustomer" (ngSubmit)="create()">
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <label style="text-align: left ; margin-right: 154px; " class="form-label" for="form3Example1">Họ Và tên:</label>
-                    <input type="text" id="form3Example1" class="form-control" formControlName="name" />
+                    <label style="text-align: left ; margin-right: 154px; " class="form-label" for="form3Example1">Họ Và
+                      tên:</label>
+                    <input type="text" id="form3Example1" class="form-control" formControlName="name"
+                           [ngClass]="(rfAddCustomer.controls['name'].touched)?
+                      rfAddCustomer.controls['name'].invalid?'is-invalid':'is-valid':''"/>
+                    <div *ngIf="rfAddCustomer.controls['name'].hasError('required') &&
+                                     rfAddCustomer.controls['name'].touched" style="color: red">
+                      Tên không được bỏ trống.
+                    </div>
+                    <div *ngIf="rfAddCustomer.controls['name'].hasError('pattern') &&
+                                     rfAddCustomer.controls['name'].touched" style="color: red">
+                      Tên phải đúng định dạng. ví dụ : Nguyễn Văn A
+                    </div>
+                    <div *ngIf="rfAddCustomer.controls['name'].hasError('maxlength') &&
+                                     rfAddCustomer.controls['name'].touched" style="color: red">
+                      Tên không được quá dài.
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
                     <label style="text-align: left ; margin-right: 154px; " class="form-label" for="form3Example2">Ngày Sinh:</label>
-                    <input type="date" id="form3Example2" class="form-control" formControlName="birthDay" />
+                    <input type="date" id="form3Example2" class="form-control" formControlName="birthDay"
+                           [ngClass]="(rfAddCustomer.controls['birthDay'].touched)?
+                             (rfAddCustomer.controls['birthDay'].invalid|| rfAddCustomer.errors?.checkBirthDay)?'is-invalid':'is-valid':''"/>
+                    <div *ngIf="rfAddCustomer.controls['birthDay'].hasError('required') &&
+                                     rfAddCustomer.controls['birthDay'].touched" style="color: red">
+                      Ngày sinh không được bỏ trống.
+                    </div>
+                    <div *ngIf="rfAddCustomer.errors?.checkBirthDay"
+                         style="color: red">
+                      Tuổi phải nằm trong khoảng 18 đến 100.
+                    </div>
                   </div>
                 </div>
               </div>
 
               <div class="form-outline mb-4">
-                <label style="text-align: left ;margin-right: 394px; " class="form-label" for="form3Example3">Số điện thoại:</label>
-                <input type="text" id="form3Example8" class="form-control" formControlName="phoneNumber"/>
+                <label style="text-align: left ;margin-right: 394px; " class="form-label" for="form3Example3">Số điện
+                  thoại:</label>
+                <input type="text" id="form3Example8" class="form-control" formControlName="phoneNumber"
+                       [ngClass]="(rfAddCustomer.controls['phoneNumber'].touched)?
+                             rfAddCustomer.controls['phoneNumber'].invalid?'is-invalid':'is-valid':''"/>
+                <div *ngIf="rfAddCustomer.controls['phoneNumber'].hasError('required') &&
+                                     rfAddCustomer.controls['phoneNumber'].touched" style="color: red">
+                  Số điện thoại không được bỏ trống.
+                </div>
+                <div *ngIf="rfAddCustomer.controls['phoneNumber'].hasError('pattern') &&
+                                     rfAddCustomer.controls['phoneNumber'].touched" style="color: red">
+                  Số điện thoại phải đúng định dạng.
+                </div>
               </div>
 
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <label style="text-align: left ;margin-right: 541px; " class="form-label" for="form3Example3">Email:</label>
-                <input type="email" id="form3Example3" class="form-control" formControlName="email"/>
+                <label style="text-align: left ;margin-right: 541px; " class="form-label"
+                       for="form3Example3">Email:</label>
+                <input type="email" id="form3Example3" class="form-control" formControlName="email"
+                       [ngClass]="(rfAddCustomer.controls['email'].touched)?
+                     (rfAddCustomer.controls['email'].invalid|| rfAddCustomer.errors?.isExist)?'is-invalid':'is-valid':''"/>
+                <div *ngIf="rfAddCustomer.controls['email'].hasError('required') &&
+                                     rfAddCustomer.controls['email'].touched" style="color: red">
+                  Email không được bỏ trống.
+                </div>
+                <div *ngIf="rfAddCustomer.controls['email'].hasError('pattern') &&
+                                     rfAddCustomer.controls['email'].touched" style="color: red">
+                  Email phải đúng định dạng.
+                </div>
+                <h1>{{status2}}</h1>
+
               </div>
 
               <!-- Password input -->
               <div class="form-outline mb-4">
-                <label style="text-align: left ;margin-right: 433px; " class="form-label" for="form3Example4">Địa Chỉ:</label>
-                <input type="text" id="form3Example4" class="form-control" formControlName="address" />
+                <label style="text-align: left ;margin-right: 433px; " class="form-label" for="form3Example4">Địa
+                  Chỉ:</label>
+                <input type="text" id="form3Example4" class="form-control" formControlName="address"
+                       [ngClass]="(rfAddCustomer.controls['address'].touched)?
+                      rfAddCustomer.controls['address'].invalid?'is-invalid':'is-valid':''"/>
+                <div *ngIf="rfAddCustomer.controls['address'].hasError('required') &&
+                                     rfAddCustomer.controls['address'].touched" style="color: red">
+                  Địa chỉ không được bỏ trống.
+                </div>
               </div>
 
               <div class="form-outline mb-4">
-                <label style="text-align: left ;margin-right: 415px; " class="form-label" for="form3Example4">Tài Khoản:</label>
-                <input type="text" id="form3Example5" class="form-control" formControlName="userName" />
+                <label style="text-align: left ;margin-right: 415px; " class="form-label" for="form3Example4">Tài
+                  Khoản:</label>
+                <input type="text" id="form3Example5" class="form-control" formControlName="userName"
+                       [ngClass]="(rfAddCustomer.controls['userName'].touched)?
+                             (rfAddCustomer.controls['userName'].invalid || rfAddCustomer.errors?.areEqual)?'is-invalid':'is-valid':''"/>
+                <div *ngIf="rfAddCustomer.controls['userName'].hasError('required') &&
+                                     rfAddCustomer.controls['userName'].touched" style="color: red">
+                  Tên đăng nhập không được bỏ trống
+                </div>
+                <div *ngIf="rfAddCustomer.controls['userName'].hasError('pattern') &&
+                                     rfAddCustomer.controls['userName'].touched" style="color: red">
+                  Tên đăng nhập phải đúng định dạng
+                </div>
+                <div *ngIf="rfAddCustomer.controls['userName'].hasError('minlength') &&
+                                     rfAddCustomer.controls['userName'].touched" style="color: red">
+                  Tên đăng nhập không được quá ngắn
+                </div>
+                <div *ngIf="rfAddCustomer.controls['userName'].hasError('maxlength') &&
+                                     rfAddCustomer.controls['userName'].touched" style="color: red">
+                  Tên đăng nhập không được quá dài
+                </div>
+                <h1>{{status}}</h1>
               </div>
 
               <div class="form-outline mb-4">
-                <label  style="text-align: left ;margin-right: 415px; " class="form-label" for="form3Example4">Mật Khẩu:</label>
-                <input type="password" id="form3Example6" class="form-control" formControlName="password" />
+                <label style="text-align: left ;margin-right: 415px; " class="form-label" for="form3Example4">Mật
+                  Khẩu:</label>
+                <input type="password" id="form3Example6" class="form-control" formControlName="password"
+                       [ngClass]="(rfAddCustomer.controls['password'].touched)?
+                        rfAddCustomer.controls['password'].invalid?'is-invalid':'is-valid':''"/>
+                <div *ngIf="rfAddCustomer.controls['password'].hasError('required') &&
+                                     rfAddCustomer.controls['password'].touched" style="color: red">
+                  Mật khẩu không được bỏ trống
+                </div>
+                <div *ngIf="rfAddCustomer.controls['password'].hasError('pattern') &&
+                                     rfAddCustomer.controls['password'].touched" style="color: red">
+                  Mật khẩu không đúng định dạng
+                </div>
+                <div *ngIf="rfAddCustomer.controls['password'].hasError('minlength') &&
+                                     rfAddCustomer.controls['password'].touched" style="color: red">
+                  Mật khẩu không được quá ngắn
+                </div>
+                <div *ngIf="rfAddCustomer.controls['password'].hasError('maxlength') &&
+                                     rfAddCustomer.controls['password'].touched" style="color: red">
+                  Mật khẩu không được quá dài
+                </div>
               </div>
 
-<!--              <div class="form-outline mb-4">-->
-<!--                <label style="text-align: left ;margin-right: 350px; " class="form-label" for="form3Example4">Nhập Lại Mật Khẩu:</label>-->
-<!--                <input type="password" id="form3Example7" class="form-control" formControlName="password" />-->
-<!--              </div>-->
+              <div class="form-outline mb-4">
+                <label style="text-align: left ;margin-right: 415px; " class="form-label" for="form3Example4">Nhập Lại
+                  Mật Khẩu:</label>
+                <input type="password" id="form3Example7" class="form-control" formControlName="confirmPassword"
+                       [ngClass]="(rfAddCustomer.controls['confirmPassword'].touched)?
+                       (rfAddCustomer.controls['password'].invalid|| rfAddCustomer.errors?.reConfirmPass)?'is-invalid':'is-valid':''">
+                <div *ngIf="rfAddCustomer.controls['confirmPassword'].hasError('required') &&
+                                     rfAddCustomer.controls['confirmPassword'].touched" style="color: red">
+                  Mật khẩu không được bỏ trống
+                </div>
+                <div
+                  *ngIf="rfAddCustomer.hasError('reConfirmPass') && rfAddCustomer.controls['confirmPassword'].touched"
+                  style="color: red">
+                  Mật khẩu không trùng khớp
+                </div>
+                <div *ngIf="rfAddCustomer.controls['confirmPassword'].hasError('minlength') &&
+                                     rfAddCustomer.controls['confirmPassword'].touched" style="color: red">
+                  Mật khẩu không được quá ngắn
+                </div>
+                <div *ngIf="rfAddCustomer.controls['confirmPassword'].hasError('maxlength') &&
+                                     rfAddCustomer.controls['confirmPassword'].touched" style="color: red">
+                  Mật khẩu không được quá dài
+                </div>
+              </div>
 
 
               <!-- Submit button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">
+              <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]="(!rfAddCustomer.valid)">
                 Đăng Ký
               </button>
 
               <p>Bạn Muốn Quay Lại Đăng Nhập? <a routerLink="/login" class="link-info">Tại đây</a></p>
 
-<!--              <button routerLink="/login" type="submit" class="btn btn-primary btn-block mb-4">-->
-<!--                Đăng Nhập-->
-<!--              </button>-->
+              <!--              <button routerLink="/login" type="submit" class="btn btn-primary btn-block mb-4">-->
+              <!--                Đăng Nhập-->
+              <!--              </button>-->
 
             </form>
           </div>
@@ -79,7 +194,7 @@
 
       <div class="col-lg-6 mb-5 mb-lg-0">
         <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4"
-             alt="" />
+             alt=""/>
       </div>
     </div>
   </div>

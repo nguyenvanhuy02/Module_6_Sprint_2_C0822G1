@@ -21,4 +21,11 @@ public class UserService implements IUserService {
     public void createUser(User user) {
         userRepository.save(user);
     }
+
+    @Override
+    public Boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+
 }

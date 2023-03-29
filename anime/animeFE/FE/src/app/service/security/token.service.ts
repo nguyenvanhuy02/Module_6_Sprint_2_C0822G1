@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import {User} from "../../model/user/user";
+import {Injectable} from '@angular/core';
+import {User} from '../../model/user/user';
 
 const TOKEN_KEY = 'Token_key';
 const ROLE_KEY = 'Role_key';
@@ -13,7 +13,8 @@ export class TokenService {
 
   roles = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   public setTokenLocal(token: string): void {
     localStorage.removeItem(TOKEN_KEY);

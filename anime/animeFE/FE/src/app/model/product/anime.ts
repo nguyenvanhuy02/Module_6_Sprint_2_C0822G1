@@ -2,7 +2,7 @@ import {Img} from './img';
 
 export interface Anime {
   id?: number;
-  name?: string;
+  name: string;
   description?: string;
   price: number;
   dateSubmitted?: string;

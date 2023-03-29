@@ -7,4 +7,6 @@ public interface IAccountService {
     Account findAccountByUsername(String username);
 
     Account createAccount(Account account);
+
+    Boolean existsByUserName ( String username);
 }

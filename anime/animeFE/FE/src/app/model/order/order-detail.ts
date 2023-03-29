@@ -2,8 +2,8 @@ import {OrderAnime} from './order-anime';
 import {Anime} from '../product/anime';
 
 export interface OrderDetail {
-  id?: number;
+  id: number;
   quantity: number;
-  anime?: Anime;
+  anime: Anime;
   orderAnime?: OrderAnime;
 }

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OrderDetail} from '../../model/order/order-detail';
 import {User} from '../../model/user/user';
 import {TokenService} from '../../service/security/token.service';
 import {OrderService} from '../../service/order/order.service';
 import {ToastrService} from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import {Anime} from '../../model/product/anime';
 
 @Component({
   selector: 'app-cart',
@@ -20,11 +21,15 @@ export class CartComponent implements OnInit {
   totalQuantity = 0;
   // @ts-ignore
   money: number;
+  // @ts-ignore
+  animeQuanlity: Anime[];
+
   constructor(
     private tokenService: TokenService,
     private orderService: OrderService,
     private toast: ToastrService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.getOrder();
@@ -110,7 +115,7 @@ export class CartComponent implements OnInit {
     this.totalPrice = 0;
   }
 
-  delete(id: number , name: string): void {
+  delete(id: number, name: string): void {
     Swal.fire({
       title: 'Bạn Có Muốn Xóa?',
       text: 'Quyển Truyện Này: ' + name + ' Không ?',
@@ -138,5 +143,4 @@ export class CartComponent implements OnInit {
       }
     });
   }
-
 }

@@ -6,4 +6,7 @@ public interface IUserService {
     User getUserById(Integer id);
 
     void createUser(User user);
+
+    Boolean existsByEmail ( String email);
+
 }

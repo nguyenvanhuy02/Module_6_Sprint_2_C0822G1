@@ -4,6 +4,6 @@ export interface OrderDetailDtoHistory {
   description?: string;
   price: number;
   datePurchase?: string;
-  quantity?: number;
+  quantity: number;
   author?: string;
 }
