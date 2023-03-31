@@ -14,4 +14,8 @@ export class UserService {
   createUser(user: any): Observable<any> {
     return this.httpClient.post<any>(environment.userUrl + 'create', user);
   }
+
+  detailUser(id: number | undefined): Observable<any> {
+    return this.httpClient.get<any>(environment.userUrl + 'detail/' + id);
+  }
 }

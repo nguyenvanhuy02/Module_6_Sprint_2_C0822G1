@@ -21,7 +21,7 @@
     </div>
 
     <div class="profile-box" *ngIf="checkLogin" style="margin-left: 350px;">
-      <a class="nav-icon position-relative text-decoration-none" href="#">
+      <a class="nav-icon position-relative text-decoration-none">
         <i  class="fa fa-fw fa-user text-dark mr-3"></i>
         <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark"></span>
       </a>
@@ -30,7 +30,7 @@
           <button *ngIf="checkLogin">{{nameAccount}}</button>
         </li>
         <li class="profile-item">
-          <button>Thông tin cá nhân</button>
+          <button routerLink="profile">Thông tin cá nhân</button>
         </li>
         <li class="profile-item">
           <button routerLink="history" >Lịch sử mua hàng</button>

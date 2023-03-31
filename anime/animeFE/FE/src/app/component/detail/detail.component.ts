@@ -8,6 +8,7 @@ import {User} from '../../model/user/user';
 import {ToastrService} from 'ngx-toastr';
 import {OrderService} from '../../service/order/order.service';
 import {OrderDetail} from '../../model/order/order-detail';
+import {ShareService} from '../../service/security/share.service';
 
 @Component({
   selector: 'app-detail',
@@ -29,17 +30,21 @@ export class DetailComponent implements OnInit {
 
   // @ts-ignore
   currentUser: User;
+  // @ts-ignore
+  quantityAime: OrderDetail;
 
   // @ts-ignore
   cart: OrderDetail[];
 
   totalQuantity = 0;
+  quantityCart = 0;
 
   constructor(private animeService: AnimeService,
               private tokenService: TokenService,
               private activatedRoute: ActivatedRoute,
               private orderService: OrderService,
               private formBuilder: FormBuilder,
+              private shareService: ShareService,
               private toast: ToastrService) {
     this.activatedRoute.paramMap.subscribe(data => {
       const id = data.get('id');
@@ -50,7 +55,6 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getOrder();
     this.detailByIdAnime(this.activatedRoute.snapshot.params.id);
   }
 
@@ -61,7 +65,14 @@ export class DetailComponent implements OnInit {
         this.detailAnime = data;
       }
     );
+    this.quantityAime = JSON.parse(this.tokenService.getUser());
+    this.orderService.getByAnime(this.quantityAime.id, id).subscribe(
+      data => {
+        this.quantityAime = data;
+      }
+    );
   }
+
 
   // tslint:disable-next-line:typedef
   getFormOrder(anime: any, quantity: number, user: User) {
@@ -79,26 +90,44 @@ export class DetailComponent implements OnInit {
       this.toast.error('Bạn cần phải đăng nhập để đặt hàng');
     }
     this.getFormOrder(id, quantity, this.user);
-    console.log('số lượng thêm ' + quantity);
+    // @ts-ignore
+    if (quantity > this.detailAnime.quantity) {
+      // @ts-ignore
+      this.toast.error('Vượt Quá Số Lượng Trong Kho! ');
+      return;
+    }
+    if (this.quantityAime !== null) {
+      // @ts-ignore
+      if ((quantity + this.quantityAime.quantity) > this.detailAnime.quantity) {
+        // @ts-ignore
+        this.toast.error('Vượt Quá Số Lượng Trong Kho! '
+          + 'Truyện Này Đã Có Trong Giỏ Hàng: ' + this.quantityAime.quantity + ' Quyển.');
+        return;
+      }
+    }
     this.orderService.addOrder(this.orderForm.value).subscribe(data => {
       this.totalQuantity = quantity + this.quantity;
       this.orderService.quantityCount$.next(this.totalQuantity);
-      console.log('tổng số lượng chuyên ' + this.totalQuantity);
       this.toast.success('Đặt hàng thành công');
+      this.clear();
+      this.getOrder();
+      this.ngOnInit();
     });
+    // this.clear();
+    // this.getOrder();
+    // this.ngOnInit();
   }
+
   // tslint:disable-next-line:typedef
   getOrder() {
     this.currentUser = JSON.parse(this.tokenService.getUser());
     this.orderService.getCart(this.currentUser.id).subscribe(data => {
       this.cart = data;
-      console.log(data);
       for (let i = 0; i < data.length; i++) {
         // @ts-ignore
         // tslint:disable-next-line:radix
         this.quantity = this.quantity + this.cart[i].quantity;
       }
-      console.log('số lượng detail' + this.quantity);
     });
   }
 
@@ -113,6 +142,11 @@ export class DetailComponent implements OnInit {
   // tslint:disable-next-line:typedef
   plus() {
     this.quality += 1;
+  }
+
+  // tslint:disable-next-line:typedef
+  clear() {
+    this.quantity = 0;
   }
 
 }

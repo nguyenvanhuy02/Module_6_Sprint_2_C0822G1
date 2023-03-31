@@ -6,19 +6,19 @@
         <div class="row">
           <div class="col-md-6 form-group">
             <label>Họ Và Tên</label>
-            <input class="form-control" type="text" value="{{user.name}}">
+            <input readonly class="form-control" type="text" value="{{user.name}}">
           </div>
           <div class="col-md-6 form-group">
             <label>Email</label>
-            <input class="form-control" type="text" value="{{user.email}}">
+            <input readonly class="form-control" type="text" value="{{user.email}}">
           </div>
           <div class="col-md-6 form-group">
             <label>Số Điện Thoại</label>
-            <input class="form-control" type="text" value="{{user.phoneNumber}}">
+            <input readonly class="form-control" type="text" value="{{user.phoneNumber}}">
           </div>
           <div class="col-md-6 form-group">
             <label>Địa Chỉ </label>
-            <input class="form-control" type="text" value="{{user.address}}">
+            <input  readonly class="form-control" type="text" value="{{user.address}}">
           </div>
           <div class="col-md-6 form-group">
             <label>Ghi Chú</label>
@@ -50,7 +50,7 @@
         <div class="pt-2">
           <div class="d-flex justify-content-between mt-2">
             <h5>Tổng Tiền</h5>
-            <h5 *ngIf="cart.length != 0" >{{totalPrice + 45000|number}}<sup>đ</sup></h5>
+            <h5 *ngIf="cart?.length != 0" >{{totalPrice + 15000|number}}<sup>đ</sup></h5>
           </div>
         </div>
       </div>

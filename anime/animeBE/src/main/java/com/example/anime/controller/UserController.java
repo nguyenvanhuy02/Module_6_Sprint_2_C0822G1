@@ -35,16 +35,11 @@ public class UserController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@Valid @RequestBody UserDto userDto) {
-        MessageRespone messageRespone = new MessageRespone();
-
         if (accountService.existsByUserName(userDto.getUserName())){
-            messageRespone.setMessage("nousername");
+            return new ResponseEntity<>( new MessageRespone("nousername"),HttpStatus.OK);
         }
         if (userService.existsByEmail(userDto.getEmail())){
-            messageRespone.setMessage2("noemail");
-        }
-        if (messageRespone.getMessage2() != null || messageRespone.getMessage() != null) {
-            return new ResponseEntity<>(messageRespone,HttpStatus.OK);
+            return new ResponseEntity<>( new MessageRespone("noemail"),HttpStatus.OK);
         }
         User user = new User();
         Account account = new Account();
@@ -64,5 +59,11 @@ public class UserController {
         userService.createUser(user);
         accountRoleService.createAccountRole(user.getAccount().getId(), 2);
         return new ResponseEntity<>(new MessageRespone("yes"),HttpStatus.OK);
+    }
+
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<User> detail(@PathVariable Integer id){
+        User user = userService.getUserById(id);
+        return new ResponseEntity<>(user,HttpStatus.OK);
     }
 }

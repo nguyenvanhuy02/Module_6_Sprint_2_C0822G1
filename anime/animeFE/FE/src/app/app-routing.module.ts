@@ -12,6 +12,7 @@ import {CreateProductComponent} from './component/create-product/create-product.
 import {ProductManagementComponent} from './component/product-management/product-management.component';
 import {AdminService} from './security/guard/admin.service';
 import {HistoryPaymentComponent} from './component/history-payment/history-payment.component';
+import {ProfileComponent} from './component/profile/profile.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'history', component: HistoryPaymentComponent, canActivate: [UserService]},
   {path: 'createProduct', component: CreateProductComponent , canActivate: [AdminService]},
   {path: 'productManagement', component: ProductManagementComponent , canActivate: [AdminService]},
+  {path: 'profile', component: ProfileComponent, canActivate: [UserService]},
 ];
 
 @NgModule({

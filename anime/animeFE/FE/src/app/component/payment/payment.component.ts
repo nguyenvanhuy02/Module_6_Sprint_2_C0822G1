@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {render} from 'creditcardpayments/creditCardPayments';
 import {TokenService} from '../../service/security/token.service';
 import {OrderService} from '../../service/order/order.service';
@@ -18,9 +18,11 @@ export class PaymentComponent implements OnInit {
   // @ts-ignore
   money: number;
   totalPrice = 0;
+  totalQuanlity = 0;
   // @ts-ignore
   cart: OrderDetail[];
   checkPaypal = true;
+  totalQuantity = 0;
 
   constructor(private tokenService: TokenService,
               private orderService: OrderService,
@@ -41,6 +43,8 @@ export class PaymentComponent implements OnInit {
         // @ts-ignore
         // tslint:disable-next-line:radix
         this.totalPrice = this.totalPrice + this.cart[i].quantity * parseInt(this.cart[i].anime.price);
+        // @ts-ignore
+        this.totalQuanlity = this.cart[i].anime.quantity - this.cart[i].quantity;
       }
       this.money = +(this.totalPrice / 23000).toFixed(2);
       if (this.checkPaypal) {
@@ -63,6 +67,7 @@ export class PaymentComponent implements OnInit {
           this.orderService.payment(this.user.id, note).subscribe(data => {
             this.toast.success('Thanh toán thành công');
             this.router.navigateByUrl('');
+            this.orderService.quantityCount$.next(this.totalQuantity);
           });
         }
       }

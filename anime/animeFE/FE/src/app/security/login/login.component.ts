@@ -74,4 +74,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
+  // signIwithGoole() {
+  //   this.authService.googleSignIn();
+  // }
 }

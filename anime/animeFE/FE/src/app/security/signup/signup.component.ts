@@ -41,14 +41,14 @@ export class SignupComponent implements OnInit {
     message: 'nousername'
   };
   data2: any = {
-    message2: 'noemail'
+    message: 'noemail'
   };
   data3: any = {
     message: 'yes'
   };
 
   data4: any = {
-    message2: 'ok'
+    message: 'ok'
   };
 
   data5: any = {
@@ -89,18 +89,19 @@ export class SignupComponent implements OnInit {
     if (this.rfAddCustomer?.valid) {
       this.userService.createUser(this.rfAddCustomer?.value).subscribe(
         data => {
+          console.log(data);
           // tslint:disable-next-line:triple-equals
-          if (JSON.stringify(data) == JSON.stringify(this.data1) && JSON.stringify(data) == JSON.stringify(this.data4) ) {
-            this.status = ' Tài Khoản Đã Tồn Tại';
+          if (JSON.stringify(data) == JSON.stringify(this.data1) ) {
+            this.toast.error('Tài Khoản Đã Tồn Tại');
             console.log('tài khoản');
           }
           // tslint:disable-next-line:triple-equals
-          if (JSON.stringify(data) == JSON.stringify(this.data2) && JSON.stringify(data) == JSON.stringify(this.data5)) {
-            this.status2 = ' Email Đã Tồn Tại';
+          if (JSON.stringify(data) == JSON.stringify(this.data2)) {
+            this.toast.error('Email Đã Tồn Tại');
             console.log('email');
           }
           // tslint:disable-next-line:triple-equals
-          if (JSON.stringify(data) == JSON.stringify(this.data4) && JSON.stringify(data) == JSON.stringify(this.data5) ) {
+          if (JSON.stringify(data) == JSON.stringify(this.data3) ) {
             this.status = 'Đăng Ký Thành Công';
             this.toast.success('Đăng ký thành công');
             this.router.navigateByUrl('/login');

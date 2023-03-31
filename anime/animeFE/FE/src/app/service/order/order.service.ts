@@ -41,5 +41,9 @@ export class OrderService {
     return this.httpClient.get<any>(environment.orderUrl + id + '/' + 'history?page=' + pageNumber);
   }
 
+  getByAnime(idUser: number, idAnime: number): Observable<any> {
+    return this.httpClient.get<any>(environment.orderUrl + idUser + '/byAnime/' + idAnime);
+  }
+
 }
 

@@ -1,7 +1,9 @@
 package com.example.anime.controller;
 
 import com.example.anime.dto.product.IOrderDetailHistory;
+import com.example.anime.dto.product.IQuantityCartDto;
 import com.example.anime.dto.product.OrderDto;
+import com.example.anime.dto.respone.MessageRespone;
 import com.example.anime.model.oder.OrderAnime;
 import com.example.anime.model.oder.OrderDetail;
 import com.example.anime.model.oder.Payment;
@@ -43,9 +45,7 @@ public class OrderController {
     @GetMapping("cart/{id}")
     public ResponseEntity<List<OrderDetail>> getListProductDetailByUserId(@PathVariable String id) {
         List<OrderDetail> orderDetails = orderService.getCartByUserId(id);
-        if (orderDetails.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-        }
+
         return new ResponseEntity<>(orderDetails, HttpStatus.OK);
     }
 
@@ -105,7 +105,7 @@ public class OrderController {
     }
 
     @GetMapping("plus/{id}")
-    public ResponseEntity<OrderDetail> plus(@PathVariable Integer id) {
+    public ResponseEntity<?> plus(@PathVariable Integer id) {
         OrderDetail orderDetail = orderService.getOrderDetail(id);
         orderDetail.setQuantity(orderDetail.getQuantity() + 1);
         orderService.addOrderDetail(orderDetail);
@@ -113,16 +113,21 @@ public class OrderController {
     }
 
     @GetMapping("payment/{id}")
-    public ResponseEntity<Payment> payment(@PathVariable Integer id, @RequestParam String note) {
+    public ResponseEntity<Payment> payment(@PathVariable Integer id,
+                                           @RequestParam String note
+    ) {
         Payment payment = paymentService.getPaymentByUserId(id);
         payment.setPaymentStatus(true);
         payment.setDatePurchase(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/YYYY")));
-        if(note.length() == 0) {
+        if (note.length() == 0) {
             payment.setShippingDescription("Không có ghi chú");
         } else {
             payment.setShippingDescription(note);
         }
         paymentService.addPayment(payment);
+//        Anime anime = animeService.findById(a)
+//        anime.setQuantity(quantity);
+//        animeService.createAnime(anime);
         return new ResponseEntity<>(payment, HttpStatus.OK);
     }
 
@@ -137,11 +142,21 @@ public class OrderController {
     }
 
     @GetMapping("/{id}/history")
-    public ResponseEntity<Page<IOrderDetailHistory>> getHistory(@PathVariable Integer id , @PageableDefault(value = 5) Pageable pageable){
-        Page<IOrderDetailHistory> orderDetails = orderService.getHistory(id,pageable);
+    public ResponseEntity<Page<IOrderDetailHistory>> getHistory(@PathVariable Integer id, @PageableDefault(value = 5) Pageable pageable) {
+        Page<IOrderDetailHistory> orderDetails = orderService.getHistory(id, pageable);
         if (orderDetails.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return new ResponseEntity<>(orderDetails,HttpStatus.OK);
+        return new ResponseEntity<>(orderDetails, HttpStatus.OK);
+    }
+
+    @GetMapping("/{idUser}/byAnime/{idAnime}")
+    public ResponseEntity<?> findByAnime(@PathVariable Integer idUser,
+                                         @PathVariable Integer idAnime) {
+        OrderDetail orderDetail = orderService.findByIdAnime(idUser, idAnime);
+//        if (orderDetail == null){
+//            return new ResponseEntity<>(new MessageRespone("lỗi rồi"), HttpStatus.OK);
+//        }
+        return new ResponseEntity<>(orderDetail, HttpStatus.OK);
     }
 }

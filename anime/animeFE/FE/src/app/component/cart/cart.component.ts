@@ -6,6 +6,8 @@ import {OrderService} from '../../service/order/order.service';
 import {ToastrService} from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import {Anime} from '../../model/product/anime';
+import {AnimeService} from '../../service/product/anime.service';
+import {ShareService} from '../../service/security/share.service';
 
 @Component({
   selector: 'app-cart',
@@ -22,12 +24,14 @@ export class CartComponent implements OnInit {
   // @ts-ignore
   money: number;
   // @ts-ignore
-  animeQuanlity: Anime[];
+  animeQuanlity: Anime;
 
   constructor(
+    private animeService: AnimeService,
     private tokenService: TokenService,
     private orderService: OrderService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private shareService: ShareService,
   ) {
   }
 
@@ -103,6 +107,10 @@ export class CartComponent implements OnInit {
           value.quantity = data.quantity;
         }
       });
+      if (data.quantity > data.anime.quantity) {
+        this.toast.error('Hiện Tại Số Lượn Trong Kho Chỉ Còn: ' + data.anime.quantity);
+        this.minus(id);
+      }
       this.total();
       // @ts-ignore
       this.money = +(this.totalPrice / 23000).toFixed(2);
@@ -113,6 +121,7 @@ export class CartComponent implements OnInit {
   clear() {
     this.cart = [];
     this.totalPrice = 0;
+    this.totalQuantity = 0;
   }
 
   delete(id: number, name: string): void {

@@ -42,7 +42,7 @@
             </div>
           </td>
           <td class="align-middle" *ngIf="item.anime" >{{item.anime.price * item.quantity |number}}<sup>đ</sup></td>
-          <td class="align-middle"><button class="btn btn-sm btn-danger"><i class="fa fa-times" (click)="delete(item.id, item.anime.name)"></i></button></td>
+          <td class="align-middle"><button class="btn btn-sm btn-danger" (click)="delete(item.id, item.anime.name)"><i class="fa fa-times"></i></button></td>
         </tr>
         </tbody>
       </table>

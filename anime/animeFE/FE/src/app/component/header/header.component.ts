@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {TokenService} from "../../service/security/token.service";
-import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
+import {Component, OnInit} from '@angular/core';
+import {TokenService} from '../../service/security/token.service';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 import {OrderService} from '../../service/order/order.service';
 import {User} from '../../model/user/user';
+import {ShareService} from '../../service/security/share.service';
 
 @Component({
   selector: 'app-header',
@@ -28,14 +29,15 @@ export class HeaderComponent implements OnInit {
     private tokenService: TokenService,
     private router: Router,
     private toast: ToastrService,
-    private orderService: OrderService
-  ) { }
+    private orderService: OrderService,
+    private shareService: ShareService
+  ) {
+  }
 
   ngOnInit(): void {
     if (this.tokenService.isLogged()) {
       this.checkLogin = true;
       this.currentUser = JSON.parse(this.tokenService.getUser());
-      console.log(this.currentUser.id);
       this.nameAccount = this.currentUser.name;
 
       const roles = this.tokenService.getRole();
@@ -70,13 +72,11 @@ export class HeaderComponent implements OnInit {
     this.currentUser = JSON.parse(this.tokenService.getUser());
     this.orderService.getCart(this.currentUser.id).subscribe(data => {
       this.cart = data;
-      console.log(data);
       for (let i = 0; i < data.length; i++) {
         // @ts-ignore
         // tslint:disable-next-line:radix
         this.quantity = this.quantity + this.cart[i].quantity;
       }
-      console.log('số lượng hedr' + this.quantity);
     });
   }
 

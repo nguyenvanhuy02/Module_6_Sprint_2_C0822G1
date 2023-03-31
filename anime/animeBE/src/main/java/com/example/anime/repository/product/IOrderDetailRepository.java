@@ -1,6 +1,7 @@
 package com.example.anime.repository.product;
 
 import com.example.anime.dto.product.IOrderDetailHistory;
+import com.example.anime.dto.product.IQuantityCartDto;
 import com.example.anime.model.oder.OrderDetail;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -42,4 +43,12 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Integ
             "join `anime` a on a.id = od.anime_id where p.payment_status = 1 and u.id = :userId and od.delete_status = false ORDER BY od.id desc ", nativeQuery = true)
     Page<IOrderDetailHistory> getHistory(@Param("userId") Integer id , Pageable pageable);
 
+
+    @Query(value = "select order_detail.* from order_detail\n" +
+            "join anime a on a.id = order_detail.anime_id\n" +
+            "join order_anime oa on order_detail.order_id = oa.id\n" +
+            "join user u on oa.user_id = u.id\n" +
+            "where a.id = :idAnime and u.id = :idUser and order_detail.delete_status = false",nativeQuery = true)
+    OrderDetail findByIdAnime(@Param("idUser") Integer idUser,
+                                   @Param("idAnime") Integer idAnime);
 }

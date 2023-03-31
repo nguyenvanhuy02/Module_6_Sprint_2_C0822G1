@@ -86,12 +86,12 @@
             <div class="product-img position-relative overflow-hidden">
               <img style="width: 175px ; height: 265px;" class="img-fluid w-100" src="{{item.url}}" alt="">
               <div class="product-action">
-                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                <a class="btn btn-outline-dark btn-square" (click)="add(item.id,quality)"><i class="fa fa-shopping-cart"></i></a>
                 <a [routerLink]="['/detail/', item.id]" class="btn btn-outline-dark btn-square" routerLink="/detail"><i class="fa fa-info"></i></a>
               </div>
             </div>
             <div class="text-center py-4">
-              <a class="h6 text-decoration-none text-truncate" href="">{{item.name}}</a>
+              <a class="h6 text-decoration-none text-truncate" [routerLink]="['/detail/', item.id]">{{item.name}}</a>
               <div class="d-flex align-items-center justify-content-center mt-2">
                 <h5>{{item.price | number}}<sup>đ</sup></h5>
               </div>
@@ -100,7 +100,7 @@
         </div>
         <div style="margin-left: 222px ;" *ngIf="pageProduct == null">
           <img height="320px" width="530" src="https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-not-found-image_2238448.jpg" alt="">
-          <h5 style="margin-left: 85px ">Không Tìm Thấy Sản Phẩm Phù Hợp</h5>
+          <h5 style="margin-left: 85px ">Không Tìm Thấy Sản Phẩm Phù Hợp 😢 😢</h5>
         </div>
 
         <div class="col-12" *ngIf="pageProduct !== null">

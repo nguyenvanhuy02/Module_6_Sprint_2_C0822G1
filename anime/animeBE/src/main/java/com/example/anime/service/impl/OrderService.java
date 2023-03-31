@@ -1,6 +1,7 @@
 package com.example.anime.service.impl;
 
 import com.example.anime.dto.product.IOrderDetailHistory;
+import com.example.anime.dto.product.IQuantityCartDto;
 import com.example.anime.model.oder.OrderAnime;
 import com.example.anime.model.oder.OrderDetail;
 import com.example.anime.repository.product.IOrderDetailRepository;
@@ -60,5 +61,10 @@ public class OrderService implements IOrderService {
     @Override
     public Page<IOrderDetailHistory> getHistory(Integer id, Pageable pageable) {
         return orderDetailRepository.getHistory(id,pageable);
+    }
+
+    @Override
+    public OrderDetail findByIdAnime(Integer idUser, Integer idAnime) {
+        return orderDetailRepository.findByIdAnime(idUser,idAnime);
     }
 }

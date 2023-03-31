@@ -98,4 +98,15 @@ public class AnimeController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@RequestBody @Validated AnimeDto animeDto, BindingResult bindingResult, @PathVariable Integer id) {
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.NOT_ACCEPTABLE);
+        }
+        Anime anime = animeService.findById(id);
+        BeanUtils.copyProperties(animeDto, anime);
+        animeService.createAnime(anime);
+        return new ResponseEntity<>(anime, HttpStatus.CREATED);
+    }
+
 }

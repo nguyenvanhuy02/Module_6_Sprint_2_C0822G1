@@ -44,6 +44,11 @@
           <strong class="text-dark mr-3">Xuất Xứ:</strong>
           <p>{{detailAnime?.origin}}</p>
         </div>
+
+        <div class="d-flex mb-4">
+          <strong class="text-dark mr-3">Số Lượng Còn:</strong>
+          <p>{{detailAnime?.quantity}}</p>
+        </div>
         <div class="d-flex align-items-center mb-4 pt-2">
           <div class="input-group quantity mr-3" style="width: 130px;">
             <div class="input-group-btn">
@@ -51,7 +56,6 @@
                 <i class="fa fa-minus"></i>
               </button>
             </div>
-<!--            <input type="text" class="form-control bg-secondary border-0 text-center" value="{{quality}}">-->
             <span class="form-control bg-secondary border-0 text-center" id="var-value">{{quality}}</span>
             <div class="input-group-btn">
               <button class="btn btn-primary btn-plus" (click)="plus()">

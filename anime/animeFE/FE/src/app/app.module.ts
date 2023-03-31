@@ -22,6 +22,8 @@ import {environment} from '../environments/environment';
 import { CreateProductComponent } from './component/create-product/create-product.component';
 import { ProductManagementComponent } from './component/product-management/product-management.component';
 import { HistoryPaymentComponent } from './component/history-payment/history-payment.component';
+import { ProfileComponent } from './component/profile/profile.component';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { HistoryPaymentComponent } from './component/history-payment/history-pay
     CreateProductComponent,
     ProductManagementComponent,
     HistoryPaymentComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 package com.example.anime.service;
 
 import com.example.anime.dto.product.IOrderDetailHistory;
+import com.example.anime.dto.product.IQuantityCartDto;
 import com.example.anime.model.oder.OrderAnime;
 import com.example.anime.model.oder.OrderDetail;
 import org.springframework.data.domain.Page;
@@ -25,4 +26,6 @@ public interface IOrderService {
     OrderDetail findById(Integer id);
 
     Page<IOrderDetailHistory> getHistory(Integer id , Pageable pageable);
+
+    OrderDetail findByIdAnime(Integer idUser , Integer idAnime);
 }
