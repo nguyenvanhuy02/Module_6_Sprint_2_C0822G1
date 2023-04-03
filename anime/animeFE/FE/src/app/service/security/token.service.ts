@@ -21,7 +21,6 @@ export class TokenService {
     localStorage.setItem(TOKEN_KEY, token);
   }
 
-
   public setTokenSession(token: string): void {
     sessionStorage.removeItem(TOKEN_KEY);
     sessionStorage.setItem(TOKEN_KEY, token);

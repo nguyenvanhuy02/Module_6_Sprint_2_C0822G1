@@ -16,7 +16,7 @@
         <div class="row mt-2">
           <div class="col-md-6"><input readonly type="text" class="form-control" placeholder="first name"
                                        value="{{detailUser.name}}"></div>
-          <div class="col-md-6"><input readonly type="text" class="form-control" value="{{detailUser.birthDay}}"></div>
+          <div class="col-md-6"><input readonly type="text" class="form-control" value="{{detailUser.birthDay | date : 'dd/MM/y'}}"></div>
         </div>
         <div class="row mt-3">
           <div class="col-md-6"><input readonly type="text" class="form-control" placeholder="Email"

@@ -1,6 +1,7 @@
 package com.example.anime.controller;
 
 import com.example.anime.dto.product.*;
+import com.example.anime.model.oder.OrderDetail;
 import com.example.anime.model.product.Anime;
 import com.example.anime.model.product.Image;
 import com.example.anime.service.IAnimeService;
@@ -107,6 +108,32 @@ public class AnimeController {
         BeanUtils.copyProperties(animeDto, anime);
         animeService.createAnime(anime);
         return new ResponseEntity<>(anime, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Anime> deleteAnime(@PathVariable("id") Integer id) {
+        Anime anime = animeService.findById(id);
+        if (anime == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        animeService.deleteAnime(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("img/{id}")
+    public ResponseEntity<List<Image>> findImgProductId(@PathVariable Integer id) {
+        List<Image> listImg = iImgUrlProductService.findImgByAnimeId(id);
+        if (listImg.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(listImg, HttpStatus.OK);
+    }
+
+    @DeleteMapping("img/delete/{id}")
+    public ResponseEntity<Image> deleteImageById(@PathVariable Integer id) {
+        Image image = iImgUrlProductService.getImgUrlProduct(id);
+        iImgUrlProductService.delete(image);
+        return new ResponseEntity<>(image, HttpStatus.OK);
     }
 
 }

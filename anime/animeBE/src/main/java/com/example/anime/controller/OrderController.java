@@ -151,12 +151,9 @@ public class OrderController {
     }
 
     @GetMapping("/{idUser}/byAnime/{idAnime}")
-    public ResponseEntity<?> findByAnime(@PathVariable Integer idUser,
+    public ResponseEntity<OrderDetail> findByAnime(@PathVariable Integer idUser,
                                          @PathVariable Integer idAnime) {
         OrderDetail orderDetail = orderService.findByIdAnime(idUser, idAnime);
-//        if (orderDetail == null){
-//            return new ResponseEntity<>(new MessageRespone("lỗi rồi"), HttpStatus.OK);
-//        }
         return new ResponseEntity<>(orderDetail, HttpStatus.OK);
     }
 }

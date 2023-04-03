@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 @Transactional
 public interface IImgUrlProductRepository extends JpaRepository<Image, Integer> {
@@ -16,4 +18,7 @@ public interface IImgUrlProductRepository extends JpaRepository<Image, Integer> 
     @Query(value = "INSERT INTO image (url,id_anime) VALUES (:url, :id_anime)", nativeQuery = true)
     void createImgProduct(@Param("url") String url,
                           @Param("id_anime") Integer id);
+
+    @Query(value = "SELECT * FROM image WHERE id_anime=:id", nativeQuery = true)
+    List<Image> findImgByAnimeId(@Param("id") int id);
 }

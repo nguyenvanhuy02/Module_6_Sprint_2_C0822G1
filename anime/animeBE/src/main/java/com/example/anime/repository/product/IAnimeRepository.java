@@ -1,20 +1,21 @@
 package com.example.anime.repository.product;
 
-import com.example.anime.dto.product.AnimeManagement;
-import com.example.anime.dto.product.IAnimeHomeDto;
-import com.example.anime.dto.product.IAnimeManagement;
-import com.example.anime.dto.product.ProductAnimeDto;
+import com.example.anime.dto.product.*;
 import com.example.anime.model.product.Anime;
+import com.example.anime.model.product.Image;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
+@Transactional
 public interface IAnimeRepository extends JpaRepository<Anime, Integer> {
 
     @Query(value = "SELECT a.id , a.name , a.price , i.url" +
@@ -54,4 +55,9 @@ public interface IAnimeRepository extends JpaRepository<Anime, Integer> {
             "            group by an.id" +
             " ORDER BY an.id desc ",nativeQuery = true)
     Page<IAnimeManagement> findAnimeManagement(@Param("animeManagement") AnimeManagement animeManagement , Pageable pageable);
+
+    @Modifying
+    @Query(value = "update anime set delete_status = true where id = :id",nativeQuery = true)
+    void deleteAnime(@Param("id") Integer id);
+
 }

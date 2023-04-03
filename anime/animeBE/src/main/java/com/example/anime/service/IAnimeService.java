@@ -5,6 +5,7 @@ import com.example.anime.dto.product.IAnimeHomeDto;
 import com.example.anime.dto.product.IAnimeManagement;
 import com.example.anime.dto.product.ProductAnimeDto;
 import com.example.anime.model.product.Anime;
+import com.example.anime.model.product.Image;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -20,4 +21,8 @@ public interface IAnimeService {
     Anime findById(Integer id);
 
     Anime createAnime (Anime anime);
+
+    void deleteAnime(Integer id);
+
+
 }

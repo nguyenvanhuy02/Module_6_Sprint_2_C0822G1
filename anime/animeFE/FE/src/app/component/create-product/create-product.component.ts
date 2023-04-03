@@ -80,8 +80,6 @@ export class CreateProductComponent implements OnInit {
       }
       setTimeout(() => {
         this.animeService.createAnime(this.product).subscribe(data => {
-          console.log(this.imgs);
-          console.log(this.imgs.length);
           if (this.imgs.length !== 0) {
             // tslint:disable-next-line:prefer-for-of no-shadowed-variable
             for (let i = 0; i < this.imgs.length; i++) {
@@ -102,25 +100,6 @@ export class CreateProductComponent implements OnInit {
     }
   }
 
-  // function createAbc(){
-  //   this.animeService.createAnime(this.product).subscribe(data => {
-  //     console.log(this.imgs);
-  //     console.log(this.imgs.length);
-  //     if (this.imgs.length !== 0) {
-  //       // tslint:disable-next-line:prefer-for-of no-shadowed-variable
-  //       for (let i = 0; i < this.imgs.length; i++) {
-  //         const image: ImgDto = {
-  //           url: this.imgs[i],
-  //           product: data.id
-  //         };
-  //         this.animeService.createImg(image).subscribe(() => {
-  //         });
-  //       }
-  //     }
-  //     this.toast.success('Thêm Mới Sản Phẩm Thành Công');
-  //     // this.route.navigateByUrl('/product');
-  //   });
-  // }
 
   // tslint:disable-next-line:typedef
   showPreview(event: any) {

@@ -38,4 +38,20 @@ export class AnimeService {
   createImg(image: any): Observable<ImgDto> {
     return this.httpClient.post<ImgDto>(environment.api_url + '/img/create', image);
   }
+
+  delete(id: number): Observable<any> {
+    return this.httpClient.delete<any>(environment.api_url + '/delete/' + id);
+  }
+
+  getListImgProductId(id: number): Observable<any> {
+    return this.httpClient.get<any>(environment.api_url + "/img/" + id);
+  }
+
+  update(anime: any, id: string): Observable<any> {
+    return this.httpClient.put<any>(environment.api_url + '/update/' + id, anime);
+  }
+
+  deleteImg(id: number): Observable<any> {
+    return this.httpClient.delete<any>(environment.api_url + "/img/delete/" + id)
+  }
 }

@@ -7,6 +7,7 @@ import {TokenService} from '../../service/security/token.service';
 import {OrderService} from '../../service/order/order.service';
 import {User} from '../../model/user/user';
 import {OrderDetail} from '../../model/order/order-detail';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product',
@@ -41,14 +42,16 @@ export class ProductComponent implements OnInit {
     private tokenService: TokenService,
     private orderService: OrderService,
     private formBuilder: FormBuilder,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private titleService: Title
   ) {
+    this.titleService.setTitle('ShopAnime-Sản Phẩm')
   }
 
   ngOnInit(): void {
-    this.getOrder();
     this.searchProductForm();
     this.findAllProduct(0);
+    this.getOrder();
   }
 
   // tslint:disable-next-line:typedef
@@ -101,12 +104,9 @@ export class ProductComponent implements OnInit {
       this.toast.error('Bạn cần phải đăng nhập để đặt hàng');
     }
     this.getFormOrder(id, quantity, this.user);
-    console.log('số lượng thêm ' + quantity);
     this.orderService.addOrder(this.orderForm.value).subscribe(data => {
       this.totalQuantity = quantity + this.quantity;
-      console.log('số lượng nhận' + this.quality);
       this.orderService.quantityCount$.next(this.totalQuantity);
-      console.log('tổng số lượng chuyên ' + this.totalQuantity);
       this.toast.success('Đặt hàng thành công');
     });
     this.clear();
@@ -118,13 +118,11 @@ export class ProductComponent implements OnInit {
     this.currentUser = JSON.parse(this.tokenService.getUser());
     this.orderService.getCart(this.currentUser.id).subscribe(data => {
       this.cart = data;
-      console.log(data);
       for (let i = 0; i < data.length; i++) {
         // @ts-ignore
         // tslint:disable-next-line:radix
         this.quantity = this.quantity + this.cart[i].quantity;
       }
-      console.log('số lượng detail' + this.quantity);
     });
   }
 

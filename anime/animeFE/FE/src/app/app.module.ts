@@ -23,6 +23,7 @@ import { CreateProductComponent } from './component/create-product/create-produc
 import { ProductManagementComponent } from './component/product-management/product-management.component';
 import { HistoryPaymentComponent } from './component/history-payment/history-payment.component';
 import { ProfileComponent } from './component/profile/profile.component';
+import { EditProductComponent } from './component/edit-product/edit-product.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ProfileComponent } from './component/profile/profile.component';
     ProductManagementComponent,
     HistoryPaymentComponent,
     ProfileComponent,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,

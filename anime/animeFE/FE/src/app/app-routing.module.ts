@@ -13,6 +13,7 @@ import {ProductManagementComponent} from './component/product-management/product
 import {AdminService} from './security/guard/admin.service';
 import {HistoryPaymentComponent} from './component/history-payment/history-payment.component';
 import {ProfileComponent} from './component/profile/profile.component';
+import {EditProductComponent} from './component/edit-product/edit-product.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'history', component: HistoryPaymentComponent, canActivate: [UserService]},
   {path: 'createProduct', component: CreateProductComponent , canActivate: [AdminService]},
+  {path: 'editProduct/:id', component: EditProductComponent , canActivate: [AdminService]},
   {path: 'productManagement', component: ProductManagementComponent , canActivate: [AdminService]},
   {path: 'profile', component: ProfileComponent, canActivate: [UserService]},
 ];

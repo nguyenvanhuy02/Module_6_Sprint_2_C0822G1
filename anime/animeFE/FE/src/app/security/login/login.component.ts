@@ -65,11 +65,9 @@ export class LoginComponent implements OnInit {
       if (messageRespone.message) {
         this.toastr.error('Không tìm thấy người dùng');
         this.router.navigateByUrl('/login');
-        console.log('Đang Nhập Thát Bại RỒi Nha');
       } else {
         this.toastr.error('Đăng nhập thất bại');
         this.router.navigateByUrl('/login');
-        console.log('Đăng nhập thất bại');
       }
     });
   }

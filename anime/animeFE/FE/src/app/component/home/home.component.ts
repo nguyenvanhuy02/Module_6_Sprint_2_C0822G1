@@ -38,6 +38,9 @@ export class HomeComponent implements OnInit {
   // @ts-ignore
   quantityAime: OrderDetail;
 
+  // @ts-ignore
+  detailAnime: Anime;
+
   constructor(private animeService: AnimeService,
               private tokenService: TokenService,
               private orderService: OrderService,

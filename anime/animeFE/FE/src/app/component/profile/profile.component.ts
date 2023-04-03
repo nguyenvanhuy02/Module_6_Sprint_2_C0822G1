@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {User} from '../../model/user/user';
 import {UserService} from '../../service/user/user.service';
 import {TokenService} from '../../service/security/token.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,9 @@ export class ProfileComponent implements OnInit {
   detailUser: User;
 
   constructor(private userService: UserService,
-              private tokenService: TokenService) {
+              private tokenService: TokenService,
+              private titleService: Title) {
+    this.titleService.setTitle('ShopAnime-Thông Tin Cá Nhân')
   }
 
   ngOnInit(): void {
@@ -25,7 +28,6 @@ export class ProfileComponent implements OnInit {
     this.detailUser = JSON.parse(this.tokenService.getUser());
     this.userService.detailUser(this.detailUser.id).subscribe(data => {
       this.detailUser = data;
-      console.log('dữ liệ' + data);
     });
   }
 

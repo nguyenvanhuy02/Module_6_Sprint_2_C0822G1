@@ -163,14 +163,6 @@
                   style="color: red">
                   Mật khẩu không trùng khớp
                 </div>
-                <div *ngIf="rfAddCustomer.controls['confirmPassword'].hasError('minlength') &&
-                                     rfAddCustomer.controls['confirmPassword'].touched" style="color: red">
-                  Mật khẩu không được quá ngắn
-                </div>
-                <div *ngIf="rfAddCustomer.controls['confirmPassword'].hasError('maxlength') &&
-                                     rfAddCustomer.controls['confirmPassword'].touched" style="color: red">
-                  Mật khẩu không được quá dài
-                </div>
               </div>
 
 

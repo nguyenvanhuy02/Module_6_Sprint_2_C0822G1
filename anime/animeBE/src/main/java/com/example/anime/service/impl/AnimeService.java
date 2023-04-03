@@ -2,6 +2,7 @@ package com.example.anime.service.impl;
 
 import com.example.anime.dto.product.*;
 import com.example.anime.model.product.Anime;
+import com.example.anime.model.product.Image;
 import com.example.anime.repository.product.IAnimeRepository;
 import com.example.anime.service.IAnimeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,13 @@ public class AnimeService implements IAnimeService {
     public Anime createAnime(Anime anime) {
         return animeRepository.save(anime);
     }
+
+    @Override
+    public void deleteAnime(Integer id) {
+        animeRepository.deleteAnime(id);
+    }
+
+
 
 
 }

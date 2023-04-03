@@ -9,6 +9,7 @@ import {ToastrService} from 'ngx-toastr';
 import {OrderService} from '../../service/order/order.service';
 import {OrderDetail} from '../../model/order/order-detail';
 import {ShareService} from '../../service/security/share.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-detail',
@@ -45,7 +46,9 @@ export class DetailComponent implements OnInit {
               private orderService: OrderService,
               private formBuilder: FormBuilder,
               private shareService: ShareService,
-              private toast: ToastrService) {
+              private toast: ToastrService,
+              private titleService: Title) {
+    this.titleService.setTitle('ShopAnime-Chi Tiết Sản Phẩm')
     this.activatedRoute.paramMap.subscribe(data => {
       const id = data.get('id');
       if (id != null) {
@@ -56,6 +59,7 @@ export class DetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.detailByIdAnime(this.activatedRoute.snapshot.params.id);
+    this.getOrder();
   }
 
   // tslint:disable-next-line:typedef
@@ -99,6 +103,7 @@ export class DetailComponent implements OnInit {
     if (this.quantityAime !== null) {
       // @ts-ignore
       if ((quantity + this.quantityAime.quantity) > this.detailAnime.quantity) {
+        console.log(this.quantityAime.quantity);
         // @ts-ignore
         this.toast.error('Vượt Quá Số Lượng Trong Kho! '
           + 'Truyện Này Đã Có Trong Giỏ Hàng: ' + this.quantityAime.quantity + ' Quyển.');
@@ -107,10 +112,12 @@ export class DetailComponent implements OnInit {
     }
     this.orderService.addOrder(this.orderForm.value).subscribe(data => {
       this.totalQuantity = quantity + this.quantity;
+      console.log('nhận lên' + this.quantity);
+      console.log('tổng' + this.totalQuantity);
       this.orderService.quantityCount$.next(this.totalQuantity);
       this.toast.success('Đặt hàng thành công');
+      // this.getOrder();
       this.clear();
-      this.getOrder();
       this.ngOnInit();
     });
     // this.clear();
@@ -130,7 +137,6 @@ export class DetailComponent implements OnInit {
       }
     });
   }
-
 
   // tslint:disable-next-line:typedef
   minus() {

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import {Anime} from '../../model/product/anime';
 import {AnimeService} from '../../service/product/anime.service';
 import {ShareService} from '../../service/security/share.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cart',
@@ -32,7 +33,9 @@ export class CartComponent implements OnInit {
     private orderService: OrderService,
     private toast: ToastrService,
     private shareService: ShareService,
+    private titleService: Title
   ) {
+    this.titleService.setTitle('ShopAnime-Giỏ Hàng')
   }
 
   ngOnInit(): void {

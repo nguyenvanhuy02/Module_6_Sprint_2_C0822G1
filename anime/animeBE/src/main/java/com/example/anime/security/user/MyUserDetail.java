@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class MyUserDetail implements UserDetails {
+
     private Account account;
 
     public MyUserDetail(Account account) {
@@ -65,4 +66,5 @@ public class MyUserDetail implements UserDetails {
     public void setAccount(Account account) {
         this.account = account;
     }
+
 }

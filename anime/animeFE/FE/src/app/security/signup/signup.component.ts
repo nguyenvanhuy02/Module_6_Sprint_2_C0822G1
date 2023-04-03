@@ -80,7 +80,7 @@ export class SignupComponent implements OnInit {
         address: ['', Validators.required],
         userName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
         password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]]
+        confirmPassword: ['', [Validators.required]]
       }, {validators: [checkBirthDay, reConfirmPass]}
     );
   }

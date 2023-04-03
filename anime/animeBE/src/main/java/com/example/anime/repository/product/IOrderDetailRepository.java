@@ -44,11 +44,12 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Integ
     Page<IOrderDetailHistory> getHistory(@Param("userId") Integer id , Pageable pageable);
 
 
-    @Query(value = "select order_detail.* from order_detail\n" +
-            "join anime a on a.id = order_detail.anime_id\n" +
-            "join order_anime oa on order_detail.order_id = oa.id\n" +
+    @Query(value = "select o.* from order_detail o\n" +
+            "join anime a on a.id = o.anime_id\n" +
+            "join order_anime oa on o.order_id = oa.id\n" +
+            "join payment p on oa.payment_id = p.id\n" +
             "join user u on oa.user_id = u.id\n" +
-            "where a.id = :idAnime and u.id = :idUser and order_detail.delete_status = false",nativeQuery = true)
+            "where a.id = :idAnime and u.id = :idUser and o.delete_status = false and p.payment_status = false",nativeQuery = true)
     OrderDetail findByIdAnime(@Param("idUser") Integer idUser,
                                    @Param("idAnime") Integer idAnime);
 }

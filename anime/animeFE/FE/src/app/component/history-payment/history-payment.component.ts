@@ -6,6 +6,7 @@ import {ToastrService} from 'ngx-toastr';
 import {User} from '../../model/user/user';
 import {TokenService} from '../../service/security/token.service';
 import {OrderService} from '../../service/order/order.service';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-history-payment',
@@ -22,8 +23,10 @@ export class HistoryPaymentComponent implements OnInit {
     private orderService: OrderService,
     private tokenService: TokenService,
     private formBuilder: FormBuilder,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private titleService: Title
   ) {
+    this.titleService.setTitle('ShopAnime-Lịch Sử Mua Hàng')
   }
 
   ngOnInit(): void {

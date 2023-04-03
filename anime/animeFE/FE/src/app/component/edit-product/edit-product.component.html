@@ -1,0 +1,105 @@
+<div class="d-flex justify-content-center align-items-center mt-2 mb-2">
+  <div class="boxed shadow h-100 ">
+    <form *ngIf="formEditAnime" class="form" [formGroup]="formEditAnime" (ngSubmit)="updateProduct(id)">
+      <fieldset>
+        <legend>
+          <div class="mt-4 text-center">
+            <h1>Cập nhật sản phẩm</h1>
+          </div>
+        </legend>
+      </fieldset>
+      <input type="text" class="form-control" formControlName="id" hidden>
+      <input formControlName="reviewStatus" hidden>
+      <input formControlName="auctionStatus" hidden>
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="name" class="form-label ms-2">Tên Truyện Tranh</label>
+        </div>
+        <input id="name" type="text" class="form-control" formControlName="name"/>
+      </div>
+
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="image" class="form-label ms-2">Hình ảnh sản phẩm</label>
+        </div>
+        <input id="image" accept="image/png, image/gif, image/jpeg" type="file"
+               #file
+               multiple
+               (change)="showPreview($event)"
+               autocomplete="off" class="form-control"
+               formControlName="images">
+        <div class="invalid-feedback d-block">
+        </div>
+      </div>
+      <div class="d-flex justify-content-left" style="overflow-x: scroll">
+        <div *ngFor="let img of imgs,let i = index" style="margin-right: 8px">
+          <div style="position: relative">
+            <img class="d-block" style="height: 84px" src="{{img.url}}">
+            <span class="remove_img" (click)="deleteImage(i,img)"
+                  aria-label="Close">
+            <i class="fa-solid fa-trash-can"></i>
+          </span>
+          </div>
+        </div>
+        <div *ngFor="let img of selectedFile,let i = index" style="margin-right: 8px">
+          <div style="position: relative">
+            <img class="d-block" style="height: 84px" src="{{img}}">
+            <span class="remove_img" (click)="deleteImageNew(i)"
+                  aria-label="Close">
+            <i class="fa-solid fa-trash-can"></i>
+          </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="description" class="form-label ms-2">Mô Tả</label>
+        </div>
+        <input id="description" type="text" class="form-control" formControlName="description"/>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="price" class="form-label ms-2">Giá Tiền</label>
+        </div>
+        <input id="price" type="text" class="form-control" formControlName="price"/>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="quantity" class="form-label ms-2">Số Lượng</label>
+        </div>
+        <input id="quantity" type="text" class="form-control" formControlName="quantity"/>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="author" class="form-label ms-2">Tác Giả</label>
+        </div>
+        <input id="author" type="text" class="form-control" formControlName="author"/>
+      </div>
+
+      <div class="mb-2">
+        <div class="d-flex align-items-center mb-2">
+          <label for="origin" class="form-label ms-2">Xuất Xứ</label>
+        </div>
+        <input id="origin" type="text" class="form-control" formControlName="origin"/>
+      </div>
+
+      <div class="d-flex mt-3 mb-2 w-100">
+        <button type="submit" style="margin-right: 5px" class="btn btn-primary d-flex justify-content-center">
+          <p>
+            Cập nhật
+          </p>
+        </button>
+        <button routerLink="/products" class="btn btn-outline btn-warning ms-auto d-flex justify-content-center">
+          <p>Hủy</p>
+        </button>
+      </div>
+
+
+    </form>
+  </div>
+</div>
