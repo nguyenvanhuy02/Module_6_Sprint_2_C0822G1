@@ -36,10 +36,8 @@ export class HistoryPaymentComponent implements OnInit {
   // tslint:disable-next-line:typedef
   getHistory(pageNumber: number) {
     this.user = JSON.parse(this.tokenService.getUser());
-    console.log(this.user.id);
     this.orderService.historyPayment(this.user.id, pageNumber).subscribe(data => {
       this.pageHistory = data;
-      console.log('dữ liệu nè ' + data);
     }, error => {
       this.toast.error('Bạn không có lịch sử thanh toán nào cả');
     });

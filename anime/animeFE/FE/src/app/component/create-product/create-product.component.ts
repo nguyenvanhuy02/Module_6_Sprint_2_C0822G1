@@ -59,10 +59,10 @@ export class CreateProductComponent implements OnInit {
     });
   }
 
+
   createNewProduct(): void {
     if (this.rfCreateProduct.valid) {
       this.product = this.rfCreateProduct.value;
-      console.log(this.rfCreateProduct.value);
       // tslint:disable-next-line:prefer-for-of
       for (let i = 0; i < this.readFile.length; i++) {
         const selectedImage = this.readFile[i];
@@ -116,10 +116,8 @@ export class CreateProductComponent implements OnInit {
         const reader = new FileReader();
         reader.onload = (e: any) => {
           this.selectedFile.push(e.target.result);
-          console.log('size' + this.selectedFile);
         };
         reader.readAsDataURL(file);
-        console.log('sizezzz' + file);
       }
     } else {
       this.toast.error('Vui Lòng không Chọn Quá 5 ảnh');

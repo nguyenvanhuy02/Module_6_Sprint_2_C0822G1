@@ -6,6 +6,8 @@ import com.example.anime.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class AccountService implements IAccountService {
     @Autowired
@@ -24,5 +26,15 @@ public class AccountService implements IAccountService {
     @Override
     public Boolean existsByUserName(String username) {
         return accountRepository.existsByUserName(username);
+    }
+
+    @Override
+    public Optional<Account> findByName(String userName) {
+        return accountRepository.findByUserName(userName);
+    }
+
+    @Override
+    public void updatePassword(String password, String userName) {
+        accountRepository.changePassword(password,userName);
     }
 }

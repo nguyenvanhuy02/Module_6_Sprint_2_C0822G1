@@ -8,9 +8,7 @@ import {Router} from '@angular/router';
 export const checkBirthDay: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   // @ts-ignore
   const birthday = new Date(control.get('birthDay').value).getTime();
-  console.log(birthday);
   const dateNow = new Date().getTime();
-  console.log(dateNow);
   if (dateNow - birthday < 18 * 365 * 24 * 60 * 60 * 1000 || dateNow - birthday > 100 * 365 * 24 * 60 * 60 * 1000) {
     return {checkBirthDay: true};
   } else {
@@ -47,20 +45,11 @@ export class SignupComponent implements OnInit {
     message: 'yes'
   };
 
-  data4: any = {
-    message: 'ok'
-  };
-
-  data5: any = {
-    message: 'ok'
-  };
-
   status = '';
-  status2 = '';
 
-  constructor(private builder: FormBuilder,
+  constructor(private userService: UserService,
+              private builder: FormBuilder,
               private toast: ToastrService,
-              private userService: UserService,
               private router: Router) {
   }
 
@@ -89,19 +78,16 @@ export class SignupComponent implements OnInit {
     if (this.rfAddCustomer?.valid) {
       this.userService.createUser(this.rfAddCustomer?.value).subscribe(
         data => {
-          console.log(data);
           // tslint:disable-next-line:triple-equals
-          if (JSON.stringify(data) == JSON.stringify(this.data1) ) {
+          if (JSON.stringify(data) == JSON.stringify(this.data1)) {
             this.toast.error('Tài Khoản Đã Tồn Tại');
-            console.log('tài khoản');
           }
           // tslint:disable-next-line:triple-equals
           if (JSON.stringify(data) == JSON.stringify(this.data2)) {
             this.toast.error('Email Đã Tồn Tại');
-            console.log('email');
           }
           // tslint:disable-next-line:triple-equals
-          if (JSON.stringify(data) == JSON.stringify(this.data3) ) {
+          if (JSON.stringify(data) == JSON.stringify(this.data3)) {
             this.status = 'Đăng Ký Thành Công';
             this.toast.success('Đăng ký thành công');
             this.router.navigateByUrl('/login');
@@ -114,5 +100,25 @@ export class SignupComponent implements OnInit {
 
   resetFormAndData(): void {
     this.ngOnInit();
+  }
+
+  checkEmail(email: string) {
+    this.userService.checkEmail(email).subscribe(
+      next => {
+        if (next == true) {
+          this.rfAddCustomer.controls.email.setErrors({'invalidEmail': true});
+        }
+      }
+    );
+  }
+
+  checkUserName(userName: string) {
+    this.userService.checkUserName(userName).subscribe(
+      next => {
+        if (next == true) {
+          this.rfAddCustomer.controls.userName.setErrors({'invalidUserName': true});
+        }
+      }
+    );
   }
 }

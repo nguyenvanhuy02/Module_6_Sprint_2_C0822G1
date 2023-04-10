@@ -1,11 +1,14 @@
 package com.example.anime.dto.user;
 
+import javax.validation.constraints.NotBlank;
+
 public class UserDto {
 
     private Integer id;
     private String name;
     private String phoneNumber;
     private String birthDay;
+    @NotBlank(message = "emai ko duoc de trong")
     private String email;
     private String address;
     private String userName;

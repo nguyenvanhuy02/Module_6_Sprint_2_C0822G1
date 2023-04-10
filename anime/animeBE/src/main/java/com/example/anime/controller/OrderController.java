@@ -43,7 +43,7 @@ public class OrderController {
 
 
     @GetMapping("cart/{id}")
-    public ResponseEntity<List<OrderDetail>> getListProductDetailByUserId(@PathVariable String id) {
+    public ResponseEntity<List<OrderDetail>> getListProductDetailByUserId(@PathVariable Integer id) {
         List<OrderDetail> orderDetails = orderService.getCartByUserId(id);
 
         return new ResponseEntity<>(orderDetails, HttpStatus.OK);
@@ -79,7 +79,7 @@ public class OrderController {
 
         OrderDetail orderDetail = new OrderDetail();
         Anime anime = animeService.findById(order.getAnime());
-        List<OrderDetail> orderDetails = orderService.getCartByUserId(String.valueOf(order.getUser()));
+        List<OrderDetail> orderDetails = orderService.getCartByUserId(order.getUser());
 
         for (OrderDetail x : orderDetails) {
             if (x.getAnime().getId() == anime.getId()) {
@@ -116,18 +116,24 @@ public class OrderController {
     public ResponseEntity<Payment> payment(@PathVariable Integer id,
                                            @RequestParam String note
     ) {
+        List<OrderDetail> orderDetails = orderService.getCartByUserId(id);
+        for (int i = 0; i < orderDetails.size(); i++) {
+            Anime anime = animeService.findById(orderDetails.get(i).getAnime().getId());
+            anime.setQuantity(anime.getQuantity() - orderDetails.get(i).getQuantity());
+            animeService.createAnime(anime);
+        }
         Payment payment = paymentService.getPaymentByUserId(id);
         payment.setPaymentStatus(true);
         payment.setDatePurchase(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/YYYY")));
+
         if (note.length() == 0) {
             payment.setShippingDescription("Không có ghi chú");
         } else {
             payment.setShippingDescription(note);
         }
+
+
         paymentService.addPayment(payment);
-//        Anime anime = animeService.findById(a)
-//        anime.setQuantity(quantity);
-//        animeService.createAnime(anime);
         return new ResponseEntity<>(payment, HttpStatus.OK);
     }
 

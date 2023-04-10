@@ -45,7 +45,7 @@ export class ProductComponent implements OnInit {
     private toast: ToastrService,
     private titleService: Title
   ) {
-    this.titleService.setTitle('ShopAnime-Sản Phẩm')
+    this.titleService.setTitle('ShopAnime-Sản Phẩm');
   }
 
   ngOnInit(): void {
@@ -94,7 +94,6 @@ export class ProductComponent implements OnInit {
       quantity: [quantity],
       anime: [anime]
     });
-    console.log(quantity + ' số lượng của nó ');
   }
 
   // tslint:disable-next-line:typedef

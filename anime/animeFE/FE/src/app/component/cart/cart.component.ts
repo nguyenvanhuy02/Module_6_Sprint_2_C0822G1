@@ -150,7 +150,7 @@ export class CartComponent implements OnInit {
           this.getOrder();
           this.clear();
         }, error => {
-          console.log(error);
+          console.log(error)
         });
       }
     });

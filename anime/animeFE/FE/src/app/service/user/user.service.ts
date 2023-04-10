@@ -18,4 +18,22 @@ export class UserService {
   detailUser(id: number | undefined): Observable<any> {
     return this.httpClient.get<any>(environment.userUrl + 'detail/' + id);
   }
+
+  checkEmail(email: string): Observable<any> {
+    let dto = {
+      email: email
+    };
+    return this.httpClient.post<any>(environment.userUrl + 'checkUniqueEmail', dto);
+  }
+
+  checkUserName(userName: string): Observable<any> {
+    let dto = {
+      userName: userName
+    };
+    return this.httpClient.post<any>(environment.userUrl + 'checkUniqueUserName', dto);
+  }
+
+  changePassword(obj: any): Observable<any> {
+    return this.httpClient.post<any>(environment.userUrl + 'change-password',obj);
+  }
 }

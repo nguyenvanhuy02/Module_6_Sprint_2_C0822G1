@@ -23,7 +23,7 @@ public interface IOrderDetailRepository extends JpaRepository<OrderDetail, Integ
             "join `user` on `user`.id = order_anime.user_id\n" +
             "join `payment` on payment.id = order_anime.payment_id \n" +
             "join `anime` on anime.id = order_detail.anime_id where payment.payment_status = 0 and user.id = :userId and order_detail.delete_status = false ", nativeQuery = true)
-    List<OrderDetail> getCartByUserId(@Param("userId") String id);
+    List<OrderDetail> getCartByUserId(@Param("userId") Integer id);
 
     @Modifying
     @Query(value = "update order_detail set delete_status = true where id = :id",nativeQuery = true)

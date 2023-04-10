@@ -29,7 +29,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public List<OrderDetail> getCartByUserId(String id) {
+    public List<OrderDetail> getCartByUserId(Integer id) {
         return orderDetailRepository.getCartByUserId(id);
     }
 

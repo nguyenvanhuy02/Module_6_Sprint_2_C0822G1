@@ -103,7 +103,6 @@ export class DetailComponent implements OnInit {
     if (this.quantityAime !== null) {
       // @ts-ignore
       if ((quantity + this.quantityAime.quantity) > this.detailAnime.quantity) {
-        console.log(this.quantityAime.quantity);
         // @ts-ignore
         this.toast.error('Vượt Quá Số Lượng Trong Kho! '
           + 'Truyện Này Đã Có Trong Giỏ Hàng: ' + this.quantityAime.quantity + ' Quyển.');
@@ -112,8 +111,6 @@ export class DetailComponent implements OnInit {
     }
     this.orderService.addOrder(this.orderForm.value).subscribe(data => {
       this.totalQuantity = quantity + this.quantity;
-      console.log('nhận lên' + this.quantity);
-      console.log('tổng' + this.totalQuantity);
       this.orderService.quantityCount$.next(this.totalQuantity);
       this.toast.success('Đặt hàng thành công');
       // this.getOrder();

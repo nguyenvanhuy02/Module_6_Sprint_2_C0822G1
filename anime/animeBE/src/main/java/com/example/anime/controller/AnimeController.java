@@ -105,6 +105,7 @@ public class AnimeController {
             return new ResponseEntity<>(bindingResult.getFieldErrors(), HttpStatus.NOT_ACCEPTABLE);
         }
         Anime anime = animeService.findById(id);
+        animeDto.setDateSubmitted(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/YYYY")));
         BeanUtils.copyProperties(animeDto, anime);
         animeService.createAnime(anime);
         return new ResponseEntity<>(anime, HttpStatus.CREATED);
